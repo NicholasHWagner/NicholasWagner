@@ -52,11 +52,11 @@
     .viewer-actions { align-self:center; flex-shrink:0; }
     .btn-sm { padding:8px 16px; font-size:.84rem; }
     .btn-navy { background:var(--navy); color:#fff; }
-    .embed-wrap { padding:0; background:#f0f4f9; border-top:1px solid var(--border); width:100%; overflow:hidden; }
-    .embed-label { padding:10px 16px; font-size:.78rem; font-weight:600; text-transform:uppercase; color:var(--muted); background:#f0f4f9; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; }
+    .embed-wrap { padding:0; background:#f0f4f9; border-top:1px solid var(--border); }
+    .embed-label { padding:10px 16px; font-size:.78rem; font-weight:600; text-transform:uppercase; color:var(--muted); background:#f0f4f9; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; justify-content:center; }
     .embed-label span { display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e; }
-    .tableau-container { padding:0; width:100%; overflow:hidden; }
-    .tableauPlaceholder { width:100% !important; }
+    .tableau-container { padding:0; width:100%; text-align:center; }
+    .tableauPlaceholder { display:inline-block; }
     .tableauViz { width:100% !important; max-width:100% !important; }
     .sirs-frame-wrap { padding:20px 36px 24px; }
     .sirs-scale-outer { overflow:hidden; height:620px; border:1px solid var(--border); border-radius:8px; background:#fff; }
@@ -175,13 +175,13 @@
             (function () {
               function sizeViz() {
                 var wrap = document.getElementById('tableau-wrap');
-                var w = wrap.offsetWidth;
-                var h = Math.round(w * 0.72);
+                var maxW = wrap.offsetWidth * 0.95; // 95% of container width
+                var h = Math.round(maxW * 0.72);
                 var viz = document.getElementById('viz-depression');
                 var obj = viz.getElementsByTagName('object')[0];
-                viz.style.width = w + 'px';
+                viz.style.width = maxW + 'px';
                 viz.style.height = h + 'px';
-                obj.style.width = w + 'px';
+                obj.style.width = maxW + 'px';
                 obj.style.height = h + 'px';
               }
               sizeViz();

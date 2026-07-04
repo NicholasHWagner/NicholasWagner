@@ -52,12 +52,22 @@
     .viewer-actions { align-self:center; flex-shrink:0; }
     .btn-sm { padding:8px 16px; font-size:.84rem; }
     .btn-navy { background:var(--navy); color:#fff; }
-    .embed-wrap { padding:0; background:#f0f4f9; border-top:1px solid var(--border); }
+    .embed-wrap { padding:16px 24px; background:#f0f4f9; border-top:1px solid var(--border); }
     .embed-label { padding:10px 16px; font-size:.78rem; font-weight:600; text-transform:uppercase; color:var(--muted); background:#f0f4f9; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; justify-content:center; }
     .embed-label span { display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e; }
-    .tableau-container { padding:0; width:100%; display:flex; justify-content:center; align-items:center; min-height:500px; }
+    .tableau-wrapper { display:flex; gap:24px; align-items:flex-start; }
+    .tableau-column { flex:1 1 auto; }
+    .tableau-container { padding:0; width:100%; }
     .tableauPlaceholder { }
     .tableauViz { width:100% !important; max-width:100% !important; }
+    .tableau-sidebar { flex:1 1 280px; padding:24px; background:#f9fafb; border-radius:10px; border:1px solid var(--border); font-size:.9rem; line-height:1.6; }
+    .tableau-sidebar h4 { font-size:.95rem; font-weight:700; color:var(--navy); margin-bottom:10px; margin-top:16px; }
+    .tableau-sidebar h4:first-child { margin-top:0; }
+    .tableau-sidebar p { color:var(--muted); margin-bottom:10px; font-size:.85rem; }
+    .tableau-sidebar ul { list-style:none; padding-left:0; margin-bottom:10px; }
+    .tableau-sidebar li { color:var(--muted); margin-bottom:6px; font-size:.85rem; padding-left:14px; position:relative; }
+    .tableau-sidebar li::before { content:"→"; position:absolute; left:0; color:var(--accent); font-weight:700; }
+    @media (max-width:1200px) { .tableau-wrapper { flex-direction:column; gap:16px; } .tableau-sidebar { flex:1 1 auto; } }
     .sirs-frame-wrap { padding:20px 36px 24px; }
     .sirs-scale-outer { overflow:hidden; height:620px; border:1px solid var(--border); border-radius:8px; background:#fff; }
     .sirs-scale-inner { width:133.33%; transform:scale(0.75); transform-origin:top left; }
@@ -154,49 +164,68 @@
       </div>
       <div class="embed-wrap">
         <div class="embed-label"><span></span> Live Interactive Dashboard</div>
-        <div class="tableau-container" id="tableau-wrap">
-          <div class="tableauPlaceholder" id="viz-depression" style="position:relative;">
-            <noscript><a href="https://public.tableau.com/shared/WT3PY72CR"><img alt="State Depression Prevalence" src="https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png" style="border:none" /></a></noscript>
-            <object class="tableauViz" style="display:block;width:100%;">
-              <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
-              <param name="embed_code_version" value="3" />
-              <param name="path" value="shared/WT3PY72CR" />
-              <param name="toolbar" value="yes" />
-              <param name="static_image" value="https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png" />
-              <param name="animate_transition" value="yes" />
-              <param name="display_static_image" value="yes" />
-              <param name="display_spinner" value="yes" />
-              <param name="display_overlay" value="yes" />
-              <param name="display_count" value="n" />
-              <param name="language" value="en-US" />
-            </object>
+        <div class="tableau-wrapper">
+          <div class="tableau-column">
+            <div class="tableau-container" id="tableau-wrap">
+              <div class="tableauPlaceholder" id="viz-depression" style="position:relative;">
+                <noscript><a href="https://public.tableau.com/shared/WT3PY72CR"><img alt="State Depression Prevalence" src="https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png" style="border:none" /></a></noscript>
+                <object class="tableauViz" style="display:block;width:100%;">
+                  <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+                  <param name="embed_code_version" value="3" />
+                  <param name="path" value="shared/WT3PY72CR" />
+                  <param name="toolbar" value="yes" />
+                  <param name="static_image" value="https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png" />
+                  <param name="animate_transition" value="yes" />
+                  <param name="display_static_image" value="yes" />
+                  <param name="display_spinner" value="yes" />
+                  <param name="display_overlay" value="yes" />
+                  <param name="display_count" value="n" />
+                  <param name="language" value="en-US" />
+                </object>
+              </div>
+              <script type="text/javascript">
+                (function () {
+                  function sizeViz() {
+                    var wrap = document.getElementById('tableau-wrap');
+                    var w = wrap.offsetWidth;
+                    var h = Math.round(w * 0.72);
+                    var viz = document.getElementById('viz-depression');
+                    var obj = viz.getElementsByTagName('object')[0];
+                    viz.style.width = w + 'px';
+                    viz.style.height = h + 'px';
+                    obj.style.width = w + 'px';
+                    obj.style.height = h + 'px';
+                  }
+                  sizeViz();
+                  window.addEventListener('resize', sizeViz);
+                  var s = document.createElement('script');
+                  s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                  s.onload = function() {
+                    setTimeout(sizeViz, 500);
+                    setTimeout(sizeViz, 1000);
+                  };
+                  document.getElementById('viz-depression').appendChild(s);
+                })();
+              </script>
+            </div>
           </div>
-          <script type="text/javascript">
-            (function () {
-              function sizeViz() {
-                var wrap = document.getElementById('tableau-wrap');
-                var maxW = wrap.offsetWidth * 0.95; // 95% of container width
-                var h = Math.round(maxW * 0.72);
-                var viz = document.getElementById('viz-depression');
-                var obj = viz.getElementsByTagName('object')[0];
-                viz.style.width = maxW + 'px';
-                viz.style.height = h + 'px';
-                obj.style.width = maxW + 'px';
-                obj.style.height = h + 'px';
-              }
-              sizeViz();
-              window.addEventListener('resize', sizeViz);
-              
-              // Resize again after Tableau API loads
-              var s = document.createElement('script');
-              s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-              s.onload = function() {
-                setTimeout(sizeViz, 500);
-                setTimeout(sizeViz, 1000);
-              };
-              document.getElementById('viz-depression').appendChild(s);
-            })();
-          </script>
+          <div class="tableau-sidebar">
+            <h4>Data Source</h4>
+            <p>CDC Behavioral Risk Factor Surveillance System (BRFSS)</p>
+            <h4>Coverage</h4>
+            <ul>
+              <li>50 U.S. States + DC</li>
+              <li>2011–2024 (14 years)</li>
+            </ul>
+            <h4>Key Metrics</h4>
+            <ul>
+              <li>Adult depression prevalence</li>
+              <li>Long-term trend analysis</li>
+              <li>State-level comparison</li>
+            </ul>
+            <h4>Interact</h4>
+            <p>Hover for state details, drag to explore regions, or use the toolbar above.</p>
+          </div>
         </div>
       </div>
     </div>

@@ -404,12 +404,12 @@
 
       <div class="embed-wrap">
         <div class="embed-label"><span></span> Live Interactive Dashboard</div>
-        <div class="tableau-container">
-          <div class='tableauPlaceholder' id='viz-depression' style='position: relative; width:100%; min-height:520px;'>
+        <div class="tableau-container" id="tableau-wrap">
+          <div class='tableauPlaceholder' id='viz-depression' style='position:relative;'>
             <noscript>
-              <a href='https://public.tableau.com/shared/WT3PY72CR'><img alt='State Depression Prevalence in 2024 and Trends Since 2011' src='https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png' style='border: none' /></a>
+              <a href='https://public.tableau.com/shared/WT3PY72CR'><img alt='State Depression Prevalence in 2024 and Trends Since 2011' src='https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png' style='border:none' /></a>
             </noscript>
-            <object class='tableauViz' style='width:100%;height:600px;display:block;'>
+            <object class='tableauViz' style='display:block;'>
               <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
               <param name='embed_code_version' value='3' />
               <param name='path' value='shared/WT3PY72CR' />
@@ -425,13 +425,22 @@
           </div>
           <script type='text/javascript'>
             (function() {
-              var divElement = document.getElementById('viz-depression');
-              var vizElement  = divElement.getElementsByTagName('object')[0];
-              vizElement.style.width  = '100%';
-              vizElement.style.height = Math.max(600, divElement.offsetWidth * 0.6) + 'px';
-              var scriptElement = document.createElement('script');
-              scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-              vizElement.parentNode.insertBefore(scriptElement, vizElement);
+              function sizeViz() {
+                var wrap = document.getElementById('tableau-wrap');
+                var w = wrap.offsetWidth;
+                var h = Math.round(w * 0.72);
+                var viz = document.getElementById('viz-depression');
+                var obj = viz.getElementsByTagName('object')[0];
+                viz.style.width  = w + 'px';
+                viz.style.height = h + 'px';
+                obj.style.width  = w + 'px';
+                obj.style.height = h + 'px';
+              }
+              sizeViz();
+              window.addEventListener('resize', sizeViz);
+              var s = document.createElement('script');
+              s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+              document.getElementById('viz-depression').appendChild(s);
             })();
           </script>
         </div>

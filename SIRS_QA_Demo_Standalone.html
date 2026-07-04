@@ -1,0 +1,1243 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIRS Mock - Coordinator QA Snapshot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --brand-blue: #2f5f94;
+  --brand-blue-soft: #a7bfd9;
+  --brand-red: #8f3537;
+  --brand-cream: #f1f4f8;
+  --text-main: #1f2a3a;
+  --line: #c7d2df;
+  --good: #2e7d32;
+  --warn: #ad6800;
+  --danger: #9a1c1c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Source Sans 3", sans-serif;
+  color: var(--text-main);
+  background: linear-gradient(180deg, #ffffff 0%, #eef3f8 55%, #e4edf6 100%);
+}
+
+.top-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: #f7f7f7;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.logo-mark {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 35%, #52a7d9 0 20%, transparent 22%),
+    radial-gradient(circle at 58% 68%, #1d6f99 0 22%, transparent 24%),
+    linear-gradient(130deg, #5ca8d8 10%, #2f5f94 70%);
+  box-shadow: inset 0 0 0 4px #e4f4fd;
+}
+
+.brand-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  color: #6485a8;
+  font-weight: 700;
+}
+
+.brand-main {
+  text-transform: uppercase;
+  font-size: 2rem;
+  line-height: 1;
+  color: #115798;
+  font-weight: 700;
+}
+
+.primary-nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--brand-red);
+  border-top: 1px solid #743235;
+  border-bottom: 1px solid #743235;
+  overflow-x: auto;
+}
+
+.nav-link {
+  color: #f7f4f4;
+  text-decoration: none;
+  padding: 0.8rem 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  background: #774143;
+}
+
+.nav-link-active {
+  background: var(--brand-blue);
+}
+
+.nav-spacer {
+  flex: 1;
+}
+
+.page-shell {
+  width: min(1300px, 100% - 2rem);
+  margin: 0 auto 2rem;
+}
+
+.breadcrumbs {
+  margin-top: 0.9rem;
+  background: #e9edf2;
+  border: 1px solid #d8e0e8;
+  color: #5a6d86;
+  padding: 0.6rem 0.8rem;
+}
+
+.hero {
+  padding: 1rem 0.1rem;
+  border-bottom: 1px solid #d4dde6;
+  margin-bottom: 0.8rem;
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: "Merriweather", serif;
+  color: #2d5687;
+  font-size: clamp(1.8rem, 1.4rem + 1.5vw, 2.6rem);
+}
+
+.hero p {
+  margin: 0.55rem 0 0;
+  font-size: 1.05rem;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: max-content minmax(180px, 320px) max-content minmax(140px, 220px) max-content 1fr max-content;
+  align-items: center;
+  gap: 0.6rem 0.75rem;
+  padding: 0.75rem 0;
+}
+
+.controls-spacer {
+  width: 100%;
+}
+
+label {
+  font-weight: 700;
+}
+
+select,
+button {
+  height: 2.35rem;
+  border-radius: 4px;
+  border: 1px solid #9eb3c9;
+  padding: 0 0.6rem;
+  font: inherit;
+}
+
+button {
+  background: linear-gradient(180deg, #3f79b2 0%, #2f5f94 100%);
+  color: #fff;
+  border-color: #2c537d;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  filter: brightness(1.06);
+}
+
+.chip-export-button {
+  justify-self: end;
+}
+
+.load-error {
+  margin: 0.5rem 0 0.8rem;
+  border: 1px solid #f0b9b9;
+  background: #ffecec;
+  color: #8f2d2d;
+  padding: 0.7rem 0.8rem;
+  border-radius: 6px;
+}
+
+.hidden {
+  display: none;
+}
+
+.summary-strip {
+  margin: 0.35rem 0 1rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid #b8c9d8;
+  background: #f9fbfd;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  align-items: center;
+  overflow: hidden;
+}
+
+.displaying-text {
+  margin: 0;
+  padding-right: 0.35rem;
+  font-size: 0.85rem;
+  color: #355272;
+  font-weight: 700;
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.summary-chip {
+  font-size: 0.78rem;
+  border: 1px solid #cad5e3;
+  background: #f7f9fc;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex: 0 1 auto;
+  line-height: 1.2;
+}
+
+.summary-chip-clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.summary-chip-clickable:hover {
+  filter: brightness(0.98);
+}
+
+.summary-chip-overdue {
+  background: #faebeb;
+  border-color: #e2c0c0;
+}
+
+.summary-chip-soon {
+  background: #fff6e8;
+  border-color: #ead4ae;
+}
+
+.summary-chip-missing {
+  background: #edf0f9;
+  border-color: #ccd3e8;
+}
+
+.flag-chip-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 auto;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.summary-chip-flagged {
+  background: #f8e3e3;
+  border-color: #e2bcbc;
+  color: #8d2323;
+}
+
+.summary-chip-good {
+  background: #e2f2e2;
+  border-color: #b9d8b9;
+  color: #1f5f2a;
+}
+
+.summary-chip-active {
+  outline: 2px solid #325d8f;
+  outline-offset: 1px;
+}
+
+.table-panel {
+  border: 1px solid #adbfce;
+  background: #fff;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 0.8rem;
+  border-bottom: 1px solid #adbfce;
+  background: linear-gradient(180deg, #4a77aa 0%, #2f5f94 100%);
+  color: #f8fbff;
+}
+
+.table-header h2 {
+  margin: 0;
+  font-family: "Merriweather", serif;
+  font-size: 1.15rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1240px;
+  table-layout: fixed;
+}
+
+th,
+td {
+  border: 1px solid var(--line);
+  padding: 0.32rem 0.4rem;
+  text-align: left;
+  vertical-align: top;
+  font-size: 0.78rem;
+}
+
+th {
+  background: #a8bed8;
+  color: #2e3e54;
+  font-size: 0.74rem;
+  text-transform: none;
+  white-space: normal;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+td {
+  background: #fff;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+tbody tr:nth-child(even) td {
+  background: #f7fafe;
+}
+
+.mock-profile-link {
+  color: #1c5ea0;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.mock-profile-link:hover {
+  color: #154a7c;
+}
+
+.coordinator-cell {
+  font-weight: 700;
+  color: #1f4064;
+  min-width: 160px;
+}
+
+tbody tr td.date-overdue {
+  background: #f9d8d6;
+  color: #9d1f1f;
+  font-weight: 700;
+}
+
+.date-neutral {
+  background: #ffffff;
+  color: #2a3646;
+}
+
+tbody tr td.date-two-weeks,
+.date-soon {
+  background: #ffe89a;
+  color: #7a4b00;
+  font-weight: 700;
+}
+
+tbody tr td.date-month-window,
+.date-ok {
+  background: #d7ebfb;
+  color: #0b4f8b;
+  font-weight: 700;
+}
+
+.date-missing {
+  background: #eceff5;
+  color: #5a6577;
+  font-style: italic;
+}
+
+tbody tr td.access-needed {
+  background: #f9d8d6;
+  color: #9d1f1f;
+  font-weight: 700;
+}
+
+@media (max-width: 1000px) {
+  .controls {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .controls-spacer {
+    display: none;
+  }
+
+  .chip-export-button {
+    justify-self: stretch;
+  }
+
+  label {
+    margin-top: 0.35rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .page-shell {
+    width: calc(100% - 1rem);
+  }
+
+  .brand-main {
+    font-size: 1.5rem;
+  }
+}
+
+</style>
+</head>
+<body>
+  <header class="top-brand">
+    <div class="logo-mark" aria-hidden="true"></div>
+    <div>
+      <div class="brand-kicker">National Center for</div>
+      <div class="brand-main">START Services</div>
+    </div>
+  </header>
+
+  <nav class="primary-nav" aria-label="Main Navigation">
+    <a href="#" class="nav-link">Home</a>
+    <a href="#" class="nav-link">Enrollees</a>
+    <a href="#" class="nav-link">Coaching</a>
+    <a href="#" class="nav-link">START Services</a>
+    <a href="#" class="nav-link">Intake Information</a>
+    <a href="#" class="nav-link">Reports</a>
+    <a href="#" class="nav-link nav-link-active">Coordinator QA Snapshot</a>
+    <span class="nav-spacer"></span>
+    <a href="#" class="nav-link">My account</a>
+    <a href="#" class="nav-link">Log out</a>
+  </nav>
+
+  <main class="page-shell">
+    <section class="breadcrumbs">Reports / Coordinator QA Snapshot</section>
+
+    <section class="hero">
+      <h1>Coordinator QA Snapshot</h1>
+      <p>Fast visibility into required QA items for assigned START cases.</p>
+    </section>
+
+    <section class="controls">
+      <label for="coordinatorSelect">START Coordinator</label>
+      <select id="coordinatorSelect" aria-label="Select START Coordinator"></select>
+      <label for="statusSelect">Status</label>
+      <select id="statusSelect" aria-label="Filter by status">
+        <option value="All">All</option>
+      </select>
+      <button id="clearFilters" type="button">Clear Filters</button>
+      <span class="controls-spacer" aria-hidden="true"></span>
+      <button id="exportCsv" class="chip-export-button" type="button">Export CSV</button>
+    </section>
+
+    <section id="loadError" class="load-error hidden" role="alert"></section>
+
+    <section class="summary-strip" aria-label="QA KPI summary">
+      <p class="displaying-text" id="displayingText">Displaying 0 - 0 of 0 Individuals</p>
+      <div id="kpiAssignedChip" class="summary-chip">Assigned: <strong id="kpiAssigned">0</strong></div>
+      <div id="kpiOverdueChip" class="summary-chip">Overdue/Missing: <strong id="kpiOverdue">0</strong></div>
+      <div id="flagCounters" class="flag-chip-grid" aria-label="Flagged counters by category"></div>
+    </section>
+
+    <section class="table-panel">
+      <div class="table-header">
+        <h2>Coordinator QA Worksheet</h2>
+        <span id="resultCount">0 results</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Start Coordinator</th>
+              <th>Local ID</th>
+              <th>Status Date</th>
+              <th>Due Date of next ABC</th>
+              <th>Due Date of next Medication List</th>
+              <th>CSCPIP - Provisional</th>
+              <th>Initial Full CSCPIP Due</th>
+              <th>CSCPIP Update Due</th>
+              <th>Initial START Plan Due</th>
+              <th>START Plan Update Due</th>
+              <th>Plan Frequency</th>
+              <th>Most Recent Outreach Contact</th>
+              <th>Living Situation at Intake</th>
+              <th>Access to Health Care</th>
+            </tr>
+          </thead>
+          <tbody id="qaTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script id='embeddedCsv' type='text/plain'>
+"Local ID","Region","Start Coordinator","Date Enrolled in START","Status","Status Date","Due Date of next ABC","Due Date of next Medication List","CSCPIP - Provisional","Initial Full CSCPIP Due","CSCPIP Update Due","Initial START Plan Due","START Plan Update Due","Intensity","Involvement","Plan Frequency","Most Recent Outreach Contact","Living Situation at Intake","Current Living Situation"
+"9000000","California : CA START Lanterman","Coordinator 1","2026-06-01","Active","2026-06-01","2026-12-12","2026-12-12","2026-06-08","2026-07-31","","2026-08-30","","","","","","Independent living","Family/relative home"
+"9000001","California : CA START Lanterman","Coordinator 2","2026-06-01","Active","2026-06-01","2026-11-30","2026-11-30","2026-06-11","2026-07-31","","2026-08-30","","","","","2026-06-25","Family/relative home",""
+"9000002","California : CA START Lanterman","Coordinator 3","2024-11-04","Active","2024-11-04","2026-12-13","2026-12-13","2024-11-06","2025-01-03","2027-07-02","2025-02-02","2026-09-14","Low (2)","Functioning (2)","Monthly","2026-06-16","Family/relative home",""
+"9000003","California : CA START Lanterman","Coordinator 1","2026-04-20","Active","2026-04-20","2026-12-05","2026-12-01","2026-06-04","2026-06-19","","2026-07-19","","","","","2026-07-01","Family/relative home",""
+"9000004","California : CA START Lanterman","Coordinator 3","2025-02-03","Active","2025-02-03","2026-10-13","2026-08-12","2025-02-05","2025-04-04","2027-04-16","2025-05-04","2026-06-11","Stable (1)","Moderate Intervention (3)","Monthly","2026-06-04","Family/relative home","Foster care home"
+"9000005","California : CA START Lanterman","Coordinator 2","2025-07-02","Active","2025-07-02","2026-12-22","2026-11-18","2025-07-08","2025-08-31","2027-04-09","2025-09-30","2026-08-20","High (4)","Intensive Intervention (4)","Weekly","2026-06-25","Unhoused, unsheltered","Family/relative home"
+"9000006","California : CA START Lanterman","Coordinator 4","2025-04-21","Active","2025-04-21","2025-12-14","2026-09-09","2025-04-29","2025-06-20","2027-03-13","2025-07-20","2026-08-03","Stable (1)","Stable (1)","Monthly","2026-06-10","Independent living",""
+"9000007","California : CA START Lanterman","Coordinator 1","2025-08-11","Active","2025-08-11","2026-09-01","2026-07-20","2025-10-27","2025-10-10","2026-12-18","2025-11-09","2026-09-23","Stable (1)","Functioning (2)","Monthly","2026-06-25","Unhoused, sheltered","Unhoused, sheltered"
+"9000008","California : CA START Lanterman","Coordinator 4","2026-05-18","Active","2026-05-18","2026-06-17","2026-12-01","2026-05-21","2026-07-17","","2026-08-16","","","","","2026-06-24","Family/relative home",""
+"9000009","California : CA START Lanterman","Coordinator 3","2026-03-16","Active","2026-03-16","2026-04-15","","2026-03-31","2026-05-15","2027-06-05","2026-06-14","2026-08-31","Low (2)","Intensive Intervention (4)","Weekly","2026-06-17","Unhoused, sheltered",""
+"9000010","California : CA START Lanterman","Coordinator 3","2025-10-06","Active","2025-10-06","2026-10-14","2026-09-29","2025-10-29","2025-12-05","2027-05-14","2026-01-04","2026-07-16","Low (2)","Moderate Intervention (3)","Weekly","2026-06-29","Independent living",""
+"9000011","California : CA START Lanterman","Coordinator 3","2023-02-09","Active","2025-04-28","2026-04-20","2026-10-12","2023-03-08","2025-06-27","2026-06-16","2025-07-27","2026-04-27","High (4)","Intensive Intervention (4)","Bi-monthly (twice a month)","2026-06-09","Family/relative home","Assisted Living Facility"
+"9000012","California : CA START Lanterman","Coordinator 2","2026-03-16","Active","2026-03-16","2026-12-05","2026-09-21","2026-03-25","2026-05-15","2027-06-11","2026-06-14","2026-09-09","Low (2)","Intensive Intervention (4)","Weekly","2026-06-11","Family/relative home",""
+"9000013","California : CA START Lanterman","Coordinator 5","2023-09-18","Active","2025-04-04","2024-04-09","2026-10-20","2023-10-05","2025-06-03","2026-06-12","2025-07-03","2026-09-01","Stable (1)","Stable (1)","Monthly","2026-06-18","Independent living",""
+"9000014","California : CA START Lanterman","Coordinator 4","2025-08-25","Active","2025-08-25","2026-12-13","2026-12-13","2025-08-29","2025-10-24","2026-12-11","2025-11-23","2026-09-02","Stable (1)","Stable (1)","Bi-monthly (twice a month)","2026-06-16","Independent living",""
+"9000015","California : CA START Lanterman","Coordinator 3","2025-12-01","Active","2025-12-01","2026-07-08","2026-11-11","2025-12-12","2026-01-30","2027-02-04","2026-03-01","2026-09-14","Stable (1)","Stable (1)","Monthly","2026-06-16","Facility-based residential setting",""
+"9000016","California : CA START Lanterman","Coordinator 3","2025-01-07","Active","2025-01-07","2026-04-29","2026-10-24","2025-02-11","2025-03-08","2027-01-14","2025-04-07","2026-07-26","Stable (1)","Stable (1)","Monthly","2026-06-23","Supervised/Supported living",""
+"9000017","California : CA START Lanterman","Coordinator 1","2025-12-15","Active","2025-12-15","2026-09-19","2026-07-14","2026-01-07","2026-02-13","2027-04-07","2026-03-15","2026-09-24","Stable (1)","Stable (1)","Monthly","2026-06-25","Supervised/Supported living",""
+"9000018","California : CA START Lanterman","Coordinator 4","2025-08-25","Active","2025-08-25","2026-10-13","2026-10-13","2025-08-26","2025-10-24","2027-02-27","2025-11-23","2026-09-14","High (4)","Moderate Intervention (3)","Weekly","2026-06-29","Family/relative home",""
+"9000019","California : CA START Lanterman","Coordinator 4","2025-02-24","Active","2025-02-24","2026-09-06","2026-09-06","2025-03-17","2025-04-25","2027-04-17","2025-05-25","2026-08-16","High (4)","Moderate Intervention (3)","Bi-monthly (twice a month)","2026-06-25","Family/relative home",""
+"9000020","California : CA START Lanterman","Coordinator 2","2026-03-02","Active","2026-03-02","2026-09-05","2026-09-01","2026-03-05","2026-05-01","2027-05-04","2026-05-31","2026-08-30","Stable (1)","Moderate Intervention (3)","Bi-monthly (twice a month)","2026-06-22","Family/relative home",""
+"9000021","California : CA START Lanterman","Coordinator 2","2025-11-10","Active","2025-11-10","2026-12-14","2026-09-07","2025-11-13","2026-01-09","2027-03-11","2026-02-08","2026-09-01","High (4)","Intensive Intervention (4)","Weekly","2026-07-01","Group home/Staffed residence",""
+"9000022","California : CA START Lanterman","Coordinator 4","2025-10-21","Active","2025-10-21","2026-12-02","2026-12-02","2025-10-24","2025-12-20","2026-12-18","2026-01-19","2026-07-15","High (4)","Moderate Intervention (3)","Weekly","2026-06-18","Family/relative home",""
+"9000023","California : CA START Lanterman","Coordinator 3","2025-07-21","Active","2025-07-21","2026-08-23","2026-08-23","2025-07-24","2025-09-19","2026-08-13","2025-10-19","2026-09-24","Moderate (3)","Moderate Intervention (3)","Bi-monthly (twice a month)","2026-06-26","Family/relative home","Family/relative home"
+"9000024","California : CA START Lanterman","Coordinator 1","2024-08-13","Active","2024-08-13","2026-08-25","2026-08-25","2024-08-16","2024-10-12","2026-08-07","2024-11-11","2026-08-17","Stable (1)","Stable (1)","Monthly","2026-06-29","Family/relative home",""
+"9000025","California : CA START Lanterman","Coordinator 2","2024-12-17","Active","2024-12-17","2026-08-31","2026-08-31","2025-01-28","2025-02-15","2027-04-24","2025-03-17","2026-06-10","Moderate (3)","Functioning (2)","Monthly","2026-06-15","Family/relative home",""
+"9000026","California : CA START Lanterman","Coordinator 3","2025-04-14","Active","2025-04-14","2026-11-14","2026-11-30","2025-04-24","2025-06-13","2027-04-27","2025-07-13","2026-08-18","Moderate (3)","Intensive Intervention (4)","Bi-monthly (twice a month)","2026-07-01","Family/relative home",""
+"9000027","California : CA START Lanterman","Coordinator 2","2025-12-22","Active","2025-12-22","2026-07-21","2026-06-28","2025-12-30","2026-02-20","2027-03-24","2026-03-22","2026-08-05","Moderate (3)","Intensive Intervention (4)","Weekly","2026-06-30","Facility-based residential setting","Group home/Staffed residence"
+"9000028","California : CA START Lanterman","Coordinator 3","2025-04-07","Active","2025-04-07","2026-11-23","2026-10-24","2025-04-14","2025-06-06","2026-06-18","2025-07-06","2026-06-18","Stable (1)","Functioning (2)","Monthly","2026-05-27","Family/relative home",""
+"9000029","California : CA START Lanterman","Coordinator 3","2025-08-11","Active","2025-08-11","2026-09-29","2026-09-01","2025-08-14","2025-10-10","2027-04-28","2025-11-09","2026-09-06","Low (2)","Functioning (2)","Bi-monthly (twice a month)","2026-06-26","Family/relative home",""
+"9000030","California : CA START Lanterman","Coordinator 4","2025-12-15","Active","2025-12-15","2026-07-15","2026-08-03","2025-12-19","2026-02-13","2027-02-04","2026-03-15","2026-09-22","Stable (1)","Stable (1)","Monthly","2026-06-24","Family/relative home",""
+"9000031","California : CA START Lanterman","Coordinator 6","2024-02-12","Active","2024-02-12","2026-11-22","2026-10-11","2024-02-21","2024-04-12","2027-02-04","2024-05-12","2026-09-08","High (4)","Moderate Intervention (3)","Bi-monthly (twice a month)","2026-06-10","Family/relative home",""
+"9000032","California : CA START Lanterman","Coordinator 1","2026-04-07","Active","2026-04-07","2026-10-26","2026-10-26","2026-04-22","2026-06-06","2027-05-13","2026-07-06","","","","","2026-06-30","Family/relative home",""
+"9000033","California : CA START Lanterman","Coordinator 7","2024-04-01","Active","2024-04-01","2026-01-24","2026-07-13","2024-04-05","2024-05-31","2027-01-30","2024-06-30","2026-06-10","Moderate (3)","Functioning (2)","Bi-monthly (twice a month)","2026-06-03","Family/relative home","Group home/Staffed residence"
+"9000034","California : CA START Lanterman","Coordinator 4","2026-03-23","Active","2026-03-23","2026-10-25","2026-10-25","2026-03-30","2026-05-22","2027-06-25","2026-06-21","","","","","2026-06-28","Family/relative home",""
+"9000035","California : CA START Lanterman","Coordinator 1","2025-09-22","Active","2025-09-22","2026-11-11","2026-11-29","2025-09-26","2025-11-21","2026-11-13","2025-12-21","2026-09-21","Stable (1)","Functioning (2)","Monthly","2026-06-26","Foster care home",""
+"9000036","California : CA START Lanterman","Coordinator 3","2026-03-23","Active","2026-03-23","2026-11-01","2026-10-03","2026-03-30","2026-05-22","2027-05-12","2026-06-21","2026-09-08","Low (2)","Functioning (2)","Bi-monthly (twice a month)","2026-06-10","Family/relative home","Family/relative home"
+"9000037","California : CA START Lanterman","Coordinator 8","2024-09-09","Active","2024-09-09","2026-11-18","2026-02-18","2024-09-20","2024-11-08","2027-05-06","2024-12-08","2026-08-19","High (4)","Moderate Intervention (3)","","2026-06-24","Family/relative home",""
+"9000038","California : CA START Lanterman","Coordinator 4","2024-11-11","Active","2024-11-11","2026-11-16","2026-10-31","2024-11-15","2025-01-10","2027-05-07","2025-02-09","2026-07-20","High (4)","Moderate Intervention (3)","Bi-monthly (twice a month)","2026-06-17","Family/relative home",""
+"9000039","California : CA START Lanterman","Coordinator 4","2026-02-23","Active","2026-02-23","2026-10-19","2026-09-14","2026-02-25","2026-04-24","","2026-05-24","","","","","2026-06-26","Family/relative home","Family/relative home"
+"9000040","California : CA START Lanterman","Coordinator 1","2025-04-21","Active","2025-04-21","2026-09-30","2026-09-13","2025-04-28","2025-06-20","2027-03-19","2025-07-20","2026-07-02","Stable (1)","Moderate Intervention (3)","Bi-monthly (twice a month)","2026-06-24","Family/relative home",""
+"9000041","California : CA START Lanterman","Coordinator 2","2026-04-13","Active","2026-04-13","2026-10-24","2026-12-05","2026-04-21","2026-06-12","2027-06-08","2026-07-12","","","","","2026-06-25","Family/relative home",""
+"9000042","California : CA START Lanterman","Coordinator 4","2023-02-09","Active","2025-12-15","2026-09-05","2026-09-20","2023-02-27","2026-02-13","2027-03-24","2026-03-15","2026-07-01","High (4)","Intensive Intervention (4)","Weekly","2026-05-12","Family/relative home","Family/relative home"
+"9000043","California : CA START Lanterman","Coordinator 4","2024-06-24","Active","2024-06-24","2026-08-04","2026-08-04","2024-07-29","2024-08-23","2026-11-20","2024-09-22","2026-09-09","Low (2)","Stable (1)","Monthly","2026-06-29","Family/relative home",""
+"9000044","California : CA START Lanterman","Coordinator 3","2025-02-24","Active","2025-02-24","2026-08-30","2026-08-02","2025-02-26","2025-04-25","2027-04-30","2025-05-25","2026-07-27","Stable (1)","Stable (1)","Bi-monthly (twice a month)","2026-06-16","Family/relative home",""
+"9000045","California : CA START Lanterman","Coordinator 1","2024-12-16","Active","2024-12-16","2026-12-12","2026-12-09","2025-01-03","2025-02-14","2026-08-13","2025-03-16","2026-08-09","High (4)","Intensive Intervention (4)","Weekly","2026-06-15","Family/relative home",""
+"9000046","California : CA START Lanterman","Coordinator 1","2025-11-18","Active","2025-11-18","2026-06-10","2026-07-28","2025-11-24","2026-01-17","2027-02-06","2026-02-16","2026-06-02","Stable (1)","Moderate Intervention (3)","Bi-monthly (twice a month)","2026-06-01","Independent living",""
+"9000047","California : CA START Lanterman","Coordinator 4","2024-11-26","Active","2024-11-26","2026-12-08","2026-12-08","2024-12-30","2025-01-25","2027-05-28","2025-02-24","2026-08-12","Low (2)","Stable (1)","Monthly","2026-06-11","Family/relative home",""
+"9000048","California : CA START Lanterman","Coordinator 2","2025-07-07","Active","2025-07-07","2026-12-20","2026-07-14","2025-07-22","2025-09-05","2027-04-02","2025-10-05","2026-08-19","Stable (1)","Intensive Intervention (4)","Weekly","2026-06-23","Family/relative home",""
+"9000049","California : CA START Lanterman","Coordinator 2","2024-12-09","Active","2024-12-09","2026-09-19","2026-10-31","2024-12-18","2025-02-07","2027-05-04","2025-03-09","2026-08-18","Moderate (3)","Intensive Intervention (4)","Bi-monthly (twice a month)","2026-06-15","Supervised/Supported living","Independent living"
+"9000050","California : CA START Lanterman","Coordinator 4","2026-05-18","Active","2026-05-18","2026-06-17","2026-11-30","2026-05-22","2026-07-17","","2026-08-16","","","","","2026-06-18","Family/relative home",""
+"9000051","California : CA START Lanterman","Coordinator 2","2025-04-07","Active","2025-04-07","2026-09-26","2026-09-26","2025-04-14","2025-06-06","2026-12-15","2025-07-06","2026-09-09","Stable (1)","Functioning (2)","Monthly","2026-06-11","Group home/Staffed residence",""
+"9000052","California : CA START Lanterman","Coordinator 1","2024-01-17","Active","2024-09-04","2026-07-06","2026-07-20","2024-09-16","2024-11-03","2027-03-16","2024-12-03","2026-08-03","Stable (1)","Stable (1)","Monthly","2026-06-08","Family/relative home",""
+"9000053","California : CA START Lanterman","Coordinator 2","2026-02-17","Active","2026-06-15","2026-07-15","2026-08-16","2026-06-24","2026-08-14","","2026-09-13","","","","","2026-02-04","Family/relative home",""
+"9000054","California : CA START Lanterman","Coordinator 1","2025-04-07","Active","2025-04-07","2026-11-07","2026-11-07","2025-04-23","2025-06-06","2027-05-11","2025-07-06","2026-07-22","Low (2)","Functioning (2)","Monthly","2026-06-25","Group home/Staffed residence",""
+"9000055","California : CA START Lanterman","Coordinator 2","2024-05-13","Active","2024-05-13","2026-09-21","2026-07-21","2024-05-23","2024-07-12","2027-01-22","2024-08-11","2026-05-11","Moderate (3)","Functioning (2)","Monthly","2026-06-30","Family/relative home",""
+"9000056","California : CA START Lanterman","Coordinator 1","2025-05-20","Active","2025-05-20","2026-11-02","2026-11-02","2025-05-30","2025-07-19","2027-06-16","2025-08-18","2026-08-04","Low (2)","Functioning (2)","Monthly","2026-06-24","Family/relative home","Family/relative home"
+"9000057","California : CA START Lanterman","Coordinator 2","2024-12-23","Active","2024-12-23","2026-09-06","2026-08-18","2024-12-24","2025-02-21","2027-03-10","2025-03-23","2026-06-08","Stable (1)","Moderate Intervention (3)","Bi-monthly (twice a month)","2026-06-25","Independent living",""
+"9000058","California : CA START Lanterman","Coordinator 4","2024-11-11","Active","2024-11-11","2026-12-12","2026-11-15","2024-11-15","2025-01-10","2026-07-07","2025-02-09","2026-08-17","High (4)","Moderate Intervention (3)","Bi-monthly (twice a month)","2026-06-15","Family/relative home",""
+"9000059","California : CA START Lanterman","Coordinator 1","2024-08-30","Active","2024-08-30","2026-09-28","2026-07-13","2024-09-04","2024-10-29","2027-01-14","2024-11-28","2026-09-07","Stable (1)","Stable (1)","Monthly","2026-06-09","Independent living",""
+"9000060","California : CA START Lanterman","Coordinator 3","2023-12-04","Active","2026-06-01","2024-06-17","2026-12-08","2026-06-11","2026-07-31","2025-01-03","2026-08-30","2024-07-01","High (4)","Moderate Intervention (3)","Weekly","2026-07-01","Family/relative home",""
+"9000061","California : CA START Lanterman","Coordinator 1","2026-02-02","Active","2026-02-02","2026-08-04","2026-09-23","2026-02-05","2026-04-03","2027-03-27","2026-05-03","2026-08-13","Moderate (3)","Moderate Intervention (3)","Bi-monthly (twice a month)","2026-06-04","Family/relative home",""
+
+</script>
+<script>
+const csvPath = "data/QualityAssurance.csv";
+const dateColumns = [
+  "Due Date of next ABC",
+  "Due Date of next Medication List",
+  "CSCPIP - Provisional",
+  "Initial Full CSCPIP Due",
+  "CSCPIP Update Due",
+  "Initial START Plan Due",
+  "START Plan Update Due",
+  "Most Recent Outreach Contact"
+];
+
+const state = {
+  rows: [],
+  filtered: [],
+  activeIssueFilter: null
+};
+
+const coordinatorSelect = document.getElementById("coordinatorSelect");
+const statusSelect = document.getElementById("statusSelect");
+const clearButton = document.getElementById("clearFilters");
+const exportCsvButton = document.getElementById("exportCsv");
+const resultCount = document.getElementById("resultCount");
+const qaTableBody = document.getElementById("qaTableBody");
+const displayingText = document.getElementById("displayingText");
+const flagCounters = document.getElementById("flagCounters");
+
+const exportHeaders = [
+  "Start Coordinator",
+  "Local ID",
+  "Status Date",
+  "Due Date of next ABC",
+  "Due Date of next Medication List",
+  "CSCPIP - Provisional",
+  "Initial Full CSCPIP Due",
+  "CSCPIP Update Due",
+  "Initial START Plan Due",
+  "START Plan Update Due",
+  "Plan Frequency",
+  "Most Recent Outreach Contact",
+  "Living Situation at Intake",
+  "Access to Health Care"
+];
+
+const kpiAssigned = document.getElementById("kpiAssigned");
+const kpiAssignedChip = document.getElementById("kpiAssignedChip");
+const kpiOverdue = document.getElementById("kpiOverdue");
+const kpiOverdueChip = document.getElementById("kpiOverdueChip");
+const loadError = document.getElementById("loadError");
+
+async function bootstrap() {
+  try {
+    const csvText = await loadCsvText();
+    state.rows = parseCsv(csvText).map(normalizeRow);
+
+    populateCoordinatorFilter(state.rows);
+    populateStatusFilter(state.rows);
+    applyFilters();
+  } catch (error) {
+    loadError.classList.remove("hidden");
+    loadError.textContent =
+      "Data could not be loaded. Use the standalone email demo file, or open this mock with a local web server so it can fetch data/QualityAssurance.csv.";
+    console.error(error);
+  }
+}
+
+async function loadCsvText() {
+  const embeddedCsv = document.getElementById("embeddedCsv");
+  if (embeddedCsv && embeddedCsv.textContent.trim()) {
+    return embeddedCsv.textContent;
+  }
+
+  const response = await fetch(csvPath);
+  if (!response.ok) {
+    throw new Error(`Could not load ${csvPath}.`);
+  }
+
+  return response.text();
+}
+
+function parseCsv(raw) {
+  const lines = raw.replace(/\r\n/g, "\n").split("\n");
+  const rows = [];
+
+  for (const line of lines) {
+    if (!line.trim()) {
+      continue;
+    }
+
+    const parsed = [];
+    let value = "";
+    let inQuotes = false;
+
+    for (let i = 0; i < line.length; i += 1) {
+      const char = line[i];
+      const next = line[i + 1];
+
+      if (char === '"') {
+        if (inQuotes && next === '"') {
+          value += '"';
+          i += 1;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (char === "," && !inQuotes) {
+        parsed.push(value.trim());
+        value = "";
+      } else {
+        value += char;
+      }
+    }
+
+    parsed.push(value.trim());
+    rows.push(parsed);
+  }
+
+  const headers = rows[0] || [];
+  return rows.slice(1).map((row) => {
+    const item = {};
+    headers.forEach((header, index) => {
+      item[header] = row[index] || "";
+    });
+    return item;
+  });
+}
+
+function normalizeRow(row) {
+  const normalized = { ...row };
+  dateColumns.forEach((column) => {
+    normalized[`${column} Parsed`] = parseDate(normalized[column]);
+  });
+  normalized.qaFlags = collectQaFlags(normalized);
+  return normalized;
+}
+
+function parseDate(value) {
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return null;
+  }
+
+  const [year, month, day] = value.split("-").map(Number);
+  const parsed = new Date(year, month - 1, day);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+}
+
+function collectQaFlags(row) {
+  const flags = [];
+  const today = atMidnight(new Date());
+
+  const qaFields = [
+    { label: "ABC", key: "Due Date of next ABC Parsed" },
+    { label: "CSCPIP Update", key: "CSCPIP Update Due Parsed" },
+    { label: "Plan Update", key: "START Plan Update Due Parsed" }
+  ];
+
+  qaFields.forEach((field) => {
+    const dateValue = row[field.key];
+    if (!dateValue) {
+      return;
+    }
+
+    const days = daysUntil(today, dateValue);
+    if (days < 0) {
+      flags.push({ text: `${field.label} Overdue`, type: "overdue" });
+    }
+  });
+
+  const initialFullDue = row["Initial Full CSCPIP Due Parsed"];
+  const hasCscpipEntry = Boolean(row["CSCPIP Update Due"]);
+  if (initialFullDue && !hasCscpipEntry && daysUntil(today, initialFullDue) < 0) {
+    flags.push({ text: "Initial Full CSCPIP Overdue", type: "overdue" });
+  }
+
+  const initialStartPlanDue = row["Initial START Plan Due Parsed"];
+  const hasStartPlanEntry = Boolean(row["START Plan Update Due"]);
+  if (initialStartPlanDue && !hasStartPlanEntry && daysUntil(today, initialStartPlanDue) < 0) {
+    flags.push({ text: "Initial START Plan Overdue", type: "overdue" });
+  }
+
+  return flags;
+}
+
+function atMidnight(date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
+function daysUntil(from, to) {
+  const msPerDay = 1000 * 60 * 60 * 24;
+  return Math.floor((atMidnight(to) - atMidnight(from)) / msPerDay);
+}
+
+function dueBucket(parsedDate) {
+  if (!parsedDate) {
+    return "missing";
+  }
+
+  const today = atMidnight(new Date());
+  const days = daysUntil(today, parsedDate);
+
+  if (days < 0) {
+    return "overdue";
+  }
+
+  if (days <= 14) {
+    return "two-weeks";
+  }
+
+  if (days <= 30) {
+    return "month-window";
+  }
+
+  return "future";
+}
+
+function bucketToClass(bucket) {
+  if (bucket === "overdue" || bucket === "missing") {
+    return "date-overdue";
+  }
+
+  if (bucket === "two-weeks") {
+    return "date-two-weeks";
+  }
+
+  if (bucket === "month-window") {
+    return "date-month-window";
+  }
+
+  return "date-neutral";
+}
+
+function uniqueSorted(values) {
+  return Array.from(new Set(values.filter(Boolean))).sort((a, b) => a.localeCompare(b));
+}
+
+function populateCoordinatorFilter(rows) {
+  const coordinators = uniqueSorted(rows.map((row) => row["Start Coordinator"]));
+  coordinatorSelect.innerHTML = '<option value="All">All Coordinators</option>';
+  coordinators.forEach((name) => {
+    const option = document.createElement("option");
+    option.value = name;
+    option.textContent = name;
+    coordinatorSelect.appendChild(option);
+  });
+}
+
+function populateStatusFilter(rows) {
+  const statuses = uniqueSorted(rows.map((row) => row.Status));
+  statusSelect.innerHTML = '<option value="All">All</option>';
+  statuses.forEach((status) => {
+    const option = document.createElement("option");
+    option.value = status;
+    option.textContent = status;
+    statusSelect.appendChild(option);
+  });
+}
+
+function applyFilters() {
+  const selectedCoordinator = coordinatorSelect.value;
+  const selectedStatus = statusSelect.value;
+  const selectedIssueFilter = state.activeIssueFilter;
+
+  const baseRows = state.rows.filter((row) => {
+    const matchCoordinator =
+      selectedCoordinator === "All" || row["Start Coordinator"] === selectedCoordinator;
+    const matchStatus = selectedStatus === "All" || row.Status === selectedStatus;
+    return matchCoordinator && matchStatus;
+  });
+
+  state.filtered = selectedIssueFilter
+    ? baseRows.filter((row) => rowMatchesIssueFilter(row, selectedIssueFilter))
+    : baseRows;
+
+  renderKpis(baseRows);
+  renderTable(state.filtered, baseRows.length);
+}
+
+function renderKpis(rows) {
+  const columnsForKpi = [
+    "Due Date of next ABC",
+    "Due Date of next Medication List",
+    "CSCPIP - Provisional",
+    "Initial Full CSCPIP Due",
+    "CSCPIP Update Due",
+    "Initial START Plan Due",
+    "START Plan Update Due"
+  ];
+
+  let overdueOrMissing = 0;
+
+  const flaggedByCategory = {
+    "ABC": 0,
+    "Medication List": 0,
+    "CSCPIP Provisional": 0,
+    "Initial Full CSCPIP": 0,
+    "CSCPIP Update": 0,
+    "Initial START Plan": 0,
+    "START Plan Update": 0,
+    "Outreach": 0,
+    "Access to Health Care": 0
+  };
+
+  rows.forEach((row) => {
+    columnsForKpi.forEach((column) => {
+      const bucket = getColumnBucket(row, column);
+      if (bucket === "overdue" || bucket === "missing") {
+        overdueOrMissing += 1;
+      }
+    });
+
+    if (isFlaggedBucket(getColumnBucket(row, "Due Date of next ABC"))) {
+      flaggedByCategory["ABC"] += 1;
+    }
+
+    if (isFlaggedBucket(getColumnBucket(row, "Due Date of next Medication List"))) {
+      flaggedByCategory["Medication List"] += 1;
+    }
+
+    if (isFlaggedBucket(getColumnBucket(row, "CSCPIP - Provisional"))) {
+      flaggedByCategory["CSCPIP Provisional"] += 1;
+    }
+
+    if (isFlaggedBucket(getColumnBucket(row, "Initial Full CSCPIP Due"))) {
+      flaggedByCategory["Initial Full CSCPIP"] += 1;
+    }
+
+    if (isFlaggedBucket(getColumnBucket(row, "CSCPIP Update Due"))) {
+      flaggedByCategory["CSCPIP Update"] += 1;
+    }
+
+    if (isFlaggedBucket(getColumnBucket(row, "Initial START Plan Due"))) {
+      flaggedByCategory["Initial START Plan"] += 1;
+    }
+
+    if (isFlaggedBucket(getColumnBucket(row, "START Plan Update Due"))) {
+      flaggedByCategory["START Plan Update"] += 1;
+    }
+
+    if (isFlaggedBucket(getOutreachBucket(row))) {
+      flaggedByCategory["Outreach"] += 1;
+    }
+
+    const accessStatus = computeAccessStatus(row);
+    if (accessStatus.className === "access-needed") {
+      flaggedByCategory["Access to Health Care"] += 1;
+    }
+  });
+
+  kpiAssigned.textContent = String(rows.length);
+  if (kpiAssignedChip) {
+    kpiAssignedChip.className = "summary-chip summary-chip-good";
+  }
+
+  kpiOverdue.textContent = String(overdueOrMissing);
+  if (kpiOverdueChip) {
+    kpiOverdueChip.className =
+      overdueOrMissing > 0 ? "summary-chip summary-chip-flagged" : "summary-chip summary-chip-good";
+  }
+  renderFlagCounters(flaggedByCategory);
+}
+
+function renderFlagCounters(categoryCounts) {
+  if (!flagCounters) {
+    return;
+  }
+
+  const shortLabels = {
+    "ABC": "ABC",
+    "Medication List": "Med List",
+    "CSCPIP Provisional": "CSCPIP Prov",
+    "Initial Full CSCPIP": "CSCPIP Full",
+    "CSCPIP Update": "CSCPIP Upd",
+    "Initial START Plan": "Init START Plan",
+    "START Plan Update": "START Plan Upd",
+    "Outreach": "Outreach",
+    "Access to Health Care": "Access"
+  };
+
+  const labels = Object.keys(categoryCounts);
+  flagCounters.innerHTML = labels
+    .map((label) => {
+      const count = categoryCounts[label];
+      const extraClass = count > 0 ? " summary-chip-flagged" : " summary-chip-good";
+      const displayLabel = shortLabels[label] || label;
+      const activeClass = state.activeIssueFilter === label ? " summary-chip-active" : "";
+      return `<div class="summary-chip summary-chip-clickable${extraClass}${activeClass}" data-filter-key="${escapeHtml(label)}" role="button" tabindex="0" title="Filter table by ${escapeHtml(displayLabel)}">${escapeHtml(displayLabel)}: <strong>${count}</strong></div>`;
+    })
+    .join("");
+}
+
+function isFlaggedBucket(bucket) {
+  return bucket === "overdue" || bucket === "missing";
+}
+
+function rowMatchesIssueFilter(row, filterKey) {
+  if (filterKey === "ABC") {
+    return isFlaggedBucket(getColumnBucket(row, "Due Date of next ABC"));
+  }
+
+  if (filterKey === "Medication List") {
+    return isFlaggedBucket(getColumnBucket(row, "Due Date of next Medication List"));
+  }
+
+  if (filterKey === "CSCPIP Provisional") {
+    return isFlaggedBucket(getColumnBucket(row, "CSCPIP - Provisional"));
+  }
+
+  if (filterKey === "Initial Full CSCPIP") {
+    return isFlaggedBucket(getColumnBucket(row, "Initial Full CSCPIP Due"));
+  }
+
+  if (filterKey === "CSCPIP Update") {
+    return isFlaggedBucket(getColumnBucket(row, "CSCPIP Update Due"));
+  }
+
+  if (filterKey === "Initial START Plan") {
+    return isFlaggedBucket(getColumnBucket(row, "Initial START Plan Due"));
+  }
+
+  if (filterKey === "START Plan Update") {
+    return isFlaggedBucket(getColumnBucket(row, "START Plan Update Due"));
+  }
+
+  if (filterKey === "Outreach") {
+    return isFlaggedBucket(getOutreachBucket(row));
+  }
+
+  if (filterKey === "Access to Health Care") {
+    return computeAccessStatus(row).className === "access-needed";
+  }
+
+  return true;
+}
+
+function renderTable(rows, baseCount = rows.length) {
+  resultCount.textContent = `${rows.length} result${rows.length === 1 ? "" : "s"}`;
+  displayingText.textContent = `${baseCount ? 1 : 0}-${baseCount} of ${baseCount}`;
+  qaTableBody.innerHTML = "";
+
+  if (!rows.length) {
+    const emptyRow = document.createElement("tr");
+    emptyRow.innerHTML = '<td colspan="14">No cases match the current filter.</td>';
+    qaTableBody.appendChild(emptyRow);
+    return;
+  }
+
+  rows
+    .slice()
+    .sort((a, b) => {
+      const byCoordinator = String(a["Start Coordinator"]).localeCompare(String(b["Start Coordinator"]));
+      if (byCoordinator !== 0) {
+        return byCoordinator;
+      }
+      return Number(a["Local ID"]) - Number(b["Local ID"]);
+    })
+    .forEach((row) => {
+      const accessStatus = computeAccessStatus(row);
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="coordinator-cell">${escapeHtml(row["Start Coordinator"])}</td>
+        <td><a href="#" class="mock-profile-link" aria-label="Open profile for Local ID ${escapeHtml(row["Local ID"])}" onclick="return false;">${escapeHtml(row["Local ID"])}</a></td>
+        <td>${escapeHtml(row["Status Date"])}</td>
+        ${renderDueDateCell(row, "Due Date of next ABC")}
+        ${renderDueDateCell(row, "Due Date of next Medication List")}
+        ${renderDueDateCell(row, "CSCPIP - Provisional")}
+        ${renderDueDateCell(row, "Initial Full CSCPIP Due")}
+        ${renderDueDateCell(row, "CSCPIP Update Due")}
+        ${renderDueDateCell(row, "Initial START Plan Due")}
+        ${renderDueDateCell(row, "START Plan Update Due")}
+        <td>${escapeHtml(row["Plan Frequency"])}</td>
+        ${renderContactCell(row)}
+        <td>${escapeHtml(row["Living Situation at Intake"])}</td>
+        <td class="${accessStatus.className}">${escapeHtml(accessStatus.label)}</td>
+      `;
+      qaTableBody.appendChild(tr);
+    });
+}
+
+function renderDueDateCell(row, column) {
+  const raw = row[column];
+  const bucket = getColumnBucket(row, column);
+  const css = bucketToClass(bucket);
+  const text = raw || (bucket === "missing" ? "Missing" : "");
+  return `<td class="${css}">${escapeHtml(text)}</td>`;
+}
+
+function renderContactCell(row) {
+  const value = row["Most Recent Outreach Contact"];
+  const bucket = getOutreachBucket(row);
+  const cssClass = bucketToClass(bucket);
+  return `<td class="${cssClass}">${escapeHtml(value || "")}</td>`;
+}
+
+function getOutreachBucket(row) {
+  const value = row["Most Recent Outreach Contact"];
+  const parsed = parseDate(value);
+  const cadenceDays = getOutreachCadenceDays(row["Plan Frequency"]);
+
+  if (!parsed || !cadenceDays) {
+    return "neutral";
+  }
+
+  const today = atMidnight(new Date());
+  const daysSince = daysUntil(parsed, today);
+  return daysSince > cadenceDays ? "overdue" : "neutral";
+}
+
+function getOutreachCadenceDays(planFrequency) {
+  const normalized = String(planFrequency || "").toLowerCase();
+
+  if (normalized.includes("weekly")) {
+    return 7;
+  }
+
+  if (normalized.includes("bi-monthly") || normalized.includes("twice a month")) {
+    return 14;
+  }
+
+  if (normalized.includes("monthly")) {
+    return 30;
+  }
+
+  return null;
+}
+
+function dueClass(parsedDate) {
+  return bucketToClass(dueBucket(parsedDate));
+}
+
+function getColumnBucket(row, column) {
+  const raw = row[column];
+
+  if (column === "CSCPIP - Provisional") {
+    return raw ? "neutral" : "missing";
+  }
+
+  if (column === "Initial Full CSCPIP Due") {
+    const dueDate = parseDate(raw);
+    const hasCscpipEntry = Boolean(row["CSCPIP Update Due"]);
+    if (!dueDate || hasCscpipEntry) {
+      return "neutral";
+    }
+    return dueBucket(dueDate);
+  }
+
+  if (column === "Initial START Plan Due") {
+    const dueDate = parseDate(raw);
+    const hasStartPlanEntry = Boolean(row["START Plan Update Due"]);
+    if (!dueDate || hasStartPlanEntry) {
+      return "neutral";
+    }
+    return dueBucket(dueDate);
+  }
+
+  return dueBucket(parseDate(raw));
+}
+
+function computeAccessStatus(row) {
+  const hasCriticalFlag = row.qaFlags.some((flag) => flag.type === "overdue");
+  if (hasCriticalFlag) {
+    return { label: "Access to Health Care Needed", className: "access-needed" };
+  }
+
+  return { label: "yes", className: "" };
+}
+
+function escapeHtml(value) {
+  const string = String(value ?? "");
+  return string
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function escapeCsv(value) {
+  const string = String(value ?? "");
+  return `"${string.replaceAll('"', '""')}"`;
+}
+
+function exportCurrentFilteredRows() {
+  const sortedRows = state.filtered
+    .slice()
+    .sort((a, b) => {
+      const byCoordinator = String(a["Start Coordinator"]).localeCompare(String(b["Start Coordinator"]));
+      if (byCoordinator !== 0) {
+        return byCoordinator;
+      }
+      return Number(a["Local ID"]) - Number(b["Local ID"]);
+    });
+
+  const lines = [exportHeaders.map(escapeCsv).join(",")];
+
+  sortedRows.forEach((row) => {
+    const accessValue = computeAccessStatus(row).label;
+    const values = [
+      row["Start Coordinator"],
+      row["Local ID"],
+      row["Status Date"],
+      row["Due Date of next ABC"],
+      row["Due Date of next Medication List"],
+      row["CSCPIP - Provisional"],
+      row["Initial Full CSCPIP Due"],
+      row["CSCPIP Update Due"],
+      row["Initial START Plan Due"],
+      row["START Plan Update Due"],
+      row["Plan Frequency"],
+      row["Most Recent Outreach Contact"],
+      row["Living Situation at Intake"],
+      accessValue
+    ];
+    lines.push(values.map(escapeCsv).join(","));
+  });
+
+  const csvData = `${lines.join("\n")}\n`;
+  const blob = new Blob([csvData], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  const timestamp = new Date()
+    .toISOString()
+    .replaceAll("-", "")
+    .replaceAll(":", "")
+    .replace("T", "_")
+    .slice(0, 13);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `qa_snapshot_filtered_${timestamp}.csv`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  URL.revokeObjectURL(url);
+}
+
+coordinatorSelect.addEventListener("change", applyFilters);
+statusSelect.addEventListener("change", applyFilters);
+clearButton.addEventListener("click", () => {
+  coordinatorSelect.value = "All";
+  statusSelect.value = "All";
+  state.activeIssueFilter = null;
+  applyFilters();
+});
+
+exportCsvButton.addEventListener("click", exportCurrentFilteredRows);
+
+flagCounters.addEventListener("click", (event) => {
+  const target = event.target.closest("[data-filter-key]");
+  if (!target) {
+    return;
+  }
+
+  const selected = target.getAttribute("data-filter-key");
+  state.activeIssueFilter = state.activeIssueFilter === selected ? null : selected;
+  applyFilters();
+});
+
+flagCounters.addEventListener("keydown", (event) => {
+  if (event.key !== "Enter" && event.key !== " ") {
+    return;
+  }
+
+  const target = event.target.closest("[data-filter-key]");
+  if (!target) {
+    return;
+  }
+
+  event.preventDefault();
+  const selected = target.getAttribute("data-filter-key");
+  state.activeIssueFilter = state.activeIssueFilter === selected ? null : selected;
+  applyFilters();
+});
+
+bootstrap();
+
+</script>
+</body>
+</html>
+

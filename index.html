@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nicholas Wagner — Data Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:    #0f2240;
+      --navy-mid:#1a3a6b;
+      --accent:  #2f80ed;
+      --accent2: #e84545;
+      --cream:   #f7f9fc;
+      --card-bg: #ffffff;
+      --text:    #1a2433;
+      --muted:   #5a6a7e;
+      --border:  #dce4ef;
+      --shadow:  0 4px 24px rgba(15,34,64,.10);
+      --radius:  14px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      color: #fff;
+      padding: 80px 24px 72px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 60px;
+      background: var(--cream);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(47,128,237,.25);
+      border: 1px solid rgba(47,128,237,.5);
+      color: #93c5fd;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: "Merriweather", serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: -.01em;
+      margin-bottom: 14px;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #a8c0e8;
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+    .hero-links {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: .9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity .15s, transform .15s;
+    }
+    .btn:hover { opacity: .85; transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.45); }
+
+    /* ── SKILLS ── */
+    .skills-bar {
+      background: var(--navy);
+      padding: 18px 24px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+    }
+    .skill-tag {
+      color: #93c5fd;
+      font-size: .82rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .skill-tag::before {
+      content: "▪";
+      color: var(--accent);
+      font-size: .6rem;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .section-label {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: "Merriweather", serif;
+      font-size: 1.9rem;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 560px;
+      margin-bottom: 44px;
+    }
+
+    /* ── PROJECT CARDS ── */
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 52px;
+    }
+    .card-header {
+      padding: 30px 36px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .card-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 3px 11px;
+      border-radius: 99px;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+    .tag-blue  { background: #dbeafe; color: #1d4ed8; }
+    .tag-green { background: #d1fae5; color: #065f46; }
+    .tag-purple{ background: #ede9fe; color: #5b21b6; }
+    .tag-red   { background: #fee2e2; color: #991b1b; }
+    .tag-orange{ background: #ffedd5; color: #92400e; }
+    .card-title {
+      font-family: "Merriweather", serif;
+      font-size: 1.35rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      color: var(--muted);
+      font-size: .95rem;
+      max-width: 680px;
+      line-height: 1.7;
+    }
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+      align-self: center;
+    }
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: .84rem;
+    }
+    .btn-navy { background: var(--navy); color: #fff; }
+
+    /* ── EMBED AREA ── */
+    .embed-wrap {
+      padding: 0;
+      background: #f0f4f9;
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+    .embed-label {
+      padding: 10px 36px;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: #f0f4f9;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .embed-label span {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    /* Tableau embed */
+    .tableau-container {
+      padding: 24px 36px 28px;
+      overflow: hidden;
+    }
+    .tableauPlaceholder {
+      width: 100%;
+      max-width: 100%;
+    }
+    .tableauViz {
+      width: 100% !important;
+    }
+
+    /* SIRS iframe */
+    .sirs-frame-wrap {
+      padding: 20px 36px 24px;
+    }
+    .sirs-frame-wrap iframe {
+      width: 100%;
+      height: 680px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+    }
+    .frame-note {
+      margin-top: 10px;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    /* ── HIGHLIGHTS ── */
+    .highlights {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: .88rem;
+      color: var(--muted);
+      flex: 1 1 220px;
+    }
+    .highlight-item::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-strip {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      padding: 52px 24px;
+    }
+    .contact-strip h2 {
+      font-family: "Merriweather", serif;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+    .contact-strip p {
+      color: #a8c0e8;
+      margin-bottom: 28px;
+      font-size: .98rem;
+    }
+    .contact-links {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: .8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 640px) {
+      .card-header { padding: 22px 20px 18px; }
+      .tableau-container { padding: 16px 20px 20px; }
+      .sirs-frame-wrap { padding: 16px 20px 20px; }
+      .embed-label { padding: 10px 20px; }
+      .sirs-frame-wrap iframe { height: 520px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO ── -->
+  <header class="hero">
+    <div class="hero-badge">Data Portfolio</div>
+    <h1>Nicholas Wagner</h1>
+    <p>Data analyst building tools that turn raw records into clear, actionable insights — from public health trends to operational compliance dashboards.</p>
+    <div class="hero-links">
+      <a href="https://public.tableau.com/app/profile/nicholas.wagner2753" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Tableau Public Profile
+      </a>
+      <a href="mailto:" class="btn btn-outline">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Contact Me
+      </a>
+    </div>
+  </header>
+
+  <!-- ── SKILLS ── -->
+  <div class="skills-bar">
+    <span class="skill-tag">Tableau</span>
+    <span class="skill-tag">Python</span>
+    <span class="skill-tag">HTML / CSS / JS</span>
+    <span class="skill-tag">Data Visualization</span>
+    <span class="skill-tag">Healthcare Data</span>
+    <span class="skill-tag">Public Health Analytics</span>
+    <span class="skill-tag">Dashboard Design</span>
+  </div>
+
+  <!-- ── PROJECTS ── -->
+  <main class="section">
+    <p class="section-label">Work</p>
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-sub">Interactive, live demos — click, filter, and explore the data directly below.</p>
+
+    <!-- PROJECT 1: Tableau -->
+    <div class="project-card">
+      <div class="card-header">
+        <div>
+          <div class="card-meta">
+            <span class="tag tag-blue">Tableau</span>
+            <span class="tag tag-green">Public Health</span>
+            <span class="tag tag-purple">Geospatial</span>
+          </div>
+          <h3 class="card-title">State Depression Prevalence in 2024 &amp; Trends Since 2011</h3>
+          <p class="card-desc">
+            A multi-view Tableau dashboard exploring depression prevalence rates across all 50 U.S. states, combining a choropleth map, long-run trend lines, and a ranked comparison table. Surfaces which states have the highest burden and how rates have shifted over more than a decade of BRFSS survey data.
+          </p>
+          <div class="highlights">
+            <span class="highlight-item">Choropleth map with state-level prevalence shading</span>
+            <span class="highlight-item">Trend lines from 2011–2024 per state</span>
+            <span class="highlight-item">Ranked bar chart for instant cross-state comparison</span>
+            <span class="highlight-item">Data sourced from CDC BRFSS behavioral survey</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="https://public.tableau.com/shared/WT3PY72CR?:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener" class="btn btn-navy btn-sm">
+            Open Full Screen ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="embed-wrap">
+        <div class="embed-label"><span></span> Live Interactive Dashboard</div>
+        <div class="tableau-container">
+          <div class='tableauPlaceholder' id='viz-depression' style='position: relative; width:100%; min-height:520px;'>
+            <noscript>
+              <a href='https://public.tableau.com/shared/WT3PY72CR'><img alt='State Depression Prevalence in 2024 and Trends Since 2011' src='https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png' style='border: none' /></a>
+            </noscript>
+            <object class='tableauViz' style='width:100%;height:600px;display:block;'>
+              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+              <param name='embed_code_version' value='3' />
+              <param name='path' value='shared/WT3PY72CR' />
+              <param name='toolbar' value='yes' />
+              <param name='static_image' value='https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png' />
+              <param name='animate_transition' value='yes' />
+              <param name='display_static_image' value='yes' />
+              <param name='display_spinner' value='yes' />
+              <param name='display_overlay' value='yes' />
+              <param name='display_count' value='n' />
+              <param name='language' value='en-US' />
+            </object>
+          </div>
+          <script type='text/javascript'>
+            (function() {
+              var divElement = document.getElementById('viz-depression');
+              var vizElement  = divElement.getElementsByTagName('object')[0];
+              vizElement.style.width  = '100%';
+              vizElement.style.height = Math.max(600, divElement.offsetWidth * 0.6) + 'px';
+              var scriptElement = document.createElement('script');
+              scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+              vizElement.parentNode.insertBefore(scriptElement, vizElement);
+            })();
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2: SIRS QA Demo -->
+    <div class="project-card">
+      <div class="card-header">
+        <div>
+          <div class="card-meta">
+            <span class="tag tag-red">Healthcare</span>
+            <span class="tag tag-orange">Compliance</span>
+            <span class="tag tag-blue">JavaScript</span>
+            <span class="tag tag-green">UX Design</span>
+          </div>
+          <h3 class="card-title">SIRS Coordinator QA Snapshot — Interactive Compliance Dashboard</h3>
+          <p class="card-desc">
+            A fully functional front-end prototype of a quality assurance dashboard for a behavioral health service coordination system. Built to give care coordinators instant visibility into overdue and at-risk compliance items across their caseload — without needing to query a database or run a report manually. Simulates a real-world clinical operations tool with live filtering, sortable tables, and status-coded alerts.
+          </p>
+          <div class="highlights">
+            <span class="highlight-item">Dynamic filtering by coordinator, status, and date range</span>
+            <span class="highlight-item">Color-coded overdue / at-risk / complete status tiers</span>
+            <span class="highlight-item">Sortable audit table with per-row drill-down</span>
+            <span class="highlight-item">Built entirely in HTML, CSS, and vanilla JavaScript</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="SIRS_QA_Demo_Standalone.html" target="_blank" rel="noopener" class="btn btn-navy btn-sm">
+            Open Full Screen ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="embed-wrap">
+        <div class="embed-label"><span></span> Live Interactive Demo</div>
+        <div class="sirs-frame-wrap">
+          <iframe
+            src="SIRS_QA_Demo_Standalone.html"
+            title="SIRS Coordinator QA Snapshot Demo"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin"
+          ></iframe>
+          <p class="frame-note">Scroll within the embed to explore, or open full screen for the best experience.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── CONTACT ── -->
+  <section class="contact-strip">
+    <h2>Let's Connect</h2>
+    <p>Open to data analyst, reporting, and business intelligence opportunities.</p>
+    <div class="contact-links">
+      <a href="https://public.tableau.com/app/profile/nicholas.wagner2753" target="_blank" rel="noopener" class="btn btn-primary">
+        Tableau Public
+      </a>
+      <a href="mailto:" class="btn btn-outline">
+        Email Me
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Nicholas Wagner &mdash; Data Portfolio
+  </footer>
+
+</body>
+</html>

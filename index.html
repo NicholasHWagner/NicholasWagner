@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nicholas Wagner — Data Portfolio</title>
+  <title>Nicholas Wagner — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
@@ -236,7 +236,7 @@
 
     /* Tableau embed */
     .tableau-container {
-      padding: 24px 36px 28px;
+      padding: 0;
       overflow: hidden;
     }
     .tableauPlaceholder {
@@ -247,16 +247,27 @@
       width: 100% !important;
     }
 
-    /* SIRS iframe */
+    /* SIRS iframe — scaled down so full dashboard is visible */
     .sirs-frame-wrap {
       padding: 20px 36px 24px;
     }
-    .sirs-frame-wrap iframe {
-      width: 100%;
-      height: 680px;
+    .sirs-scale-outer {
+      overflow: hidden;
+      height: 620px;
       border: 1px solid var(--border);
       border-radius: 8px;
       background: #fff;
+    }
+    .sirs-scale-inner {
+      width: 133.33%;
+      transform: scale(0.75);
+      transform-origin: top left;
+    }
+    .sirs-scale-inner iframe {
+      width: 100%;
+      height: 827px;
+      border: none;
+      display: block;
     }
     .frame-note {
       margin-top: 10px;
@@ -321,10 +332,10 @@
 
     @media (max-width: 640px) {
       .card-header { padding: 22px 20px 18px; }
-      .tableau-container { padding: 16px 20px 20px; }
       .sirs-frame-wrap { padding: 16px 20px 20px; }
       .embed-label { padding: 10px 20px; }
-      .sirs-frame-wrap iframe { height: 520px; }
+      .sirs-scale-outer { height: 480px; }
+      .sirs-scale-inner iframe { height: 640px; }
     }
   </style>
 </head>
@@ -332,9 +343,9 @@
 
   <!-- ── HERO ── -->
   <header class="hero">
-    <div class="hero-badge">Data Portfolio</div>
+    <div class="hero-badge">Portfolio</div>
     <h1>Nicholas Wagner</h1>
-    <p>Data analyst building tools that turn raw records into clear, actionable insights — from public health trends to operational compliance dashboards.</p>
+    <p>Building tools, visualizations, and systems that make complex information easy to understand and act on.</p>
     <div class="hero-links">
       <a href="https://public.tableau.com/app/profile/nicholas.wagner2753" target="_blank" rel="noopener" class="btn btn-primary">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -349,20 +360,20 @@
 
   <!-- ── SKILLS ── -->
   <div class="skills-bar">
-    <span class="skill-tag">Tableau</span>
     <span class="skill-tag">Python</span>
+    <span class="skill-tag">SQL</span>
+    <span class="skill-tag">Tableau</span>
     <span class="skill-tag">HTML / CSS / JS</span>
     <span class="skill-tag">Data Visualization</span>
-    <span class="skill-tag">Healthcare Data</span>
-    <span class="skill-tag">Public Health Analytics</span>
     <span class="skill-tag">Dashboard Design</span>
+    <span class="skill-tag">UX Prototyping</span>
   </div>
 
   <!-- ── PROJECTS ── -->
   <main class="section">
     <p class="section-label">Work</p>
     <h2 class="section-title">Featured Projects</h2>
-    <p class="section-sub">Interactive, live demos — click, filter, and explore the data directly below.</p>
+    <p class="section-sub">Live, interactive demos — explore them directly below.</p>
 
     <!-- PROJECT 1: Tableau -->
     <div class="project-card">
@@ -458,13 +469,17 @@
       <div class="embed-wrap">
         <div class="embed-label"><span></span> Live Interactive Demo</div>
         <div class="sirs-frame-wrap">
-          <iframe
-            src="SIRS_QA_Demo_Standalone.html"
-            title="SIRS Coordinator QA Snapshot Demo"
-            loading="lazy"
-            sandbox="allow-scripts allow-same-origin"
-          ></iframe>
-          <p class="frame-note">Scroll within the embed to explore, or open full screen for the best experience.</p>
+          <div class="sirs-scale-outer">
+            <div class="sirs-scale-inner">
+              <iframe
+                src="SIRS_QA_Demo_Standalone.html"
+                title="SIRS Coordinator QA Snapshot Demo"
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin"
+              ></iframe>
+            </div>
+          </div>
+          <p class="frame-note">Open full screen for the best experience.</p>
         </div>
       </div>
     </div>
@@ -474,7 +489,7 @@
   <!-- ── CONTACT ── -->
   <section class="contact-strip">
     <h2>Let's Connect</h2>
-    <p>Open to data analyst, reporting, and business intelligence opportunities.</p>
+    <p>Have a project, role, or idea worth talking about? Reach out.</p>
     <div class="contact-links">
       <a href="https://public.tableau.com/app/profile/nicholas.wagner2753" target="_blank" rel="noopener" class="btn btn-primary">
         Tableau Public
@@ -486,7 +501,7 @@
   </section>
 
   <footer>
-    &copy; 2026 Nicholas Wagner &mdash; Data Portfolio
+    &copy; 2026 Nicholas Wagner
   </footer>
 
 </body>

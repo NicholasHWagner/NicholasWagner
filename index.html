@@ -3,677 +3,283 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nicholas Wagner â€” Portfolio</title>
+  <title>Nicholas Wagner — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
   <style>
-    /* â”€â”€ GRID + VIEWER LAYOUT â”€â”€ */
-    :root {
-      --navy:    #0f2240;
-      --navy-mid:#1a3a6b;
-      --accent:  #2f80ed;
-      --accent2: #e84545;
-      --cream:   #f7f9fc;
-      --card-bg: #ffffff;
-      --text:    #1a2433;
-      --muted:   #5a6a7e;
-      --border:  #dce4ef;
-      --shadow:  0 4px 24px rgba(15,34,64,.10);
-      --radius:  14px;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: "Inter", sans-serif;
-      background: var(--cream);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    /* â”€â”€ HERO â”€â”€ */
-    .hero {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-      color: #fff;
-      padding: 80px 24px 72px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      bottom: -2px; left: 0; right: 0;
-      height: 60px;
-      background: var(--cream);
-      clip-path: ellipse(55% 100% at 50% 100%);
-    }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(47,128,237,.25);
-      border: 1px solid rgba(47,128,237,.5);
-      color: #93c5fd;
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: 99px;
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-family: "Merriweather", serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      letter-spacing: -.01em;
-      margin-bottom: 14px;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      color: #a8c0e8;
-      max-width: 560px;
-      margin: 0 auto 32px;
-    }
-    .hero-links {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 10px 22px;
-      border-radius: 8px;
-      font-size: .9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: opacity .15s, transform .15s;
-    }
-    .btn:hover { opacity: .85; transform: translateY(-1px); }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.45); }
-
-    /* â”€â”€ SKILLS â”€â”€ */
-    .skills-bar {
-      background: var(--navy);
-      padding: 18px 24px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px 24px;
-    }
-    .skill-tag {
-      color: #93c5fd;
-      font-size: .82rem;
-      font-weight: 500;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .skill-tag::before {
-      content: "â–ª";
-      color: var(--accent);
-      font-size: .6rem;
-    }
-
-    /* â”€â”€ SECTION â”€â”€ */
-    .section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 60px 24px;
-    }
-    .section-label {
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-    .section-title {
-      font-family: "Merriweather", serif;
-      font-size: 1.9rem;
-      color: var(--navy);
-      margin-bottom: 10px;
-    }
-    .section-sub {
-      color: var(--muted);
-      font-size: 1rem;
-      max-width: 560px;
-      margin-bottom: 44px;
-    }
-
-    /* â”€â”€ PROJECT CARDS â”€â”€ */
-    .project-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      margin-bottom: 52px;
-    }
-    .card-header {
-      padding: 30px 36px 22px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .card-meta {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-    }
-    .tag {
-      display: inline-block;
-      padding: 3px 11px;
-      border-radius: 99px;
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .04em;
-    }
-    .tag-blue   { background: #dbeafe; color: #1d4ed8; }
-    .tag-green  { background: #d1fae5; color: #065f46; }
-    .tag-purple { background: #ede9fe; color: #5b21b6; }
-    .tag-red    { background: #fee2e2; color: #991b1b; }
-    .tag-orange { background: #ffedd5; color: #92400e; }
-    .tag-gray   { background: #f1f5f9; color: #64748b; }
-    .card-title {
-      font-family: "Merriweather", serif;
-      font-size: 1.35rem;
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
-    .card-desc {
-      color: var(--muted);
-      font-size: .95rem;
-      max-width: 680px;
-      line-height: 1.7;
-    }
-    .card-actions {
-      display: flex;
-      gap: 10px;
-      flex-shrink: 0;
-      align-self: center;
-    }
-    .btn-sm {
-      padding: 8px 16px;
-      font-size: .84rem;
-    }
-    .btn-navy { background: var(--navy); color: #fff; }
-
-    /* â”€â”€ EMBED AREA â”€â”€ */
-    .embed-wrap {
-      padding: 0;
-      background: #f0f4f9;
-      border-top: 1px solid var(--border);
-      position: relative;
-    }
-    .embed-label {
-      padding: 10px 36px;
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      background: #f0f4f9;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .embed-label span {
-      display: inline-block;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #22c55e;
-    }
-
-    /* Tableau embed */
-    .tableau-container {
-      padding: 0;
-      overflow: hidden;
-    }
-    .tableauPlaceholder {
-      width: 100%;
-      max-width: 100%;
-    }
-    .tableauViz {
-      width: 100% !important;
-    }
-
-    /* SIRS iframe â€” scaled down so full dashboard is visible */
-    .sirs-frame-wrap {
-      padding: 20px 36px 24px;
-    }
-    .sirs-scale-outer {
-      overflow: hidden;
-      height: 620px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: #fff;
-    }
-    .sirs-scale-inner {
-      width: 133.33%;
-      transform: scale(0.75);
-      transform-origin: top left;
-    }
-    .sirs-scale-inner iframe {
-      width: 100%;
-      height: 827px;
-      border: none;
-      display: block;
-    }
-    .frame-note {
-      margin-top: 10px;
-      font-size: .8rem;
-      color: var(--muted);
-    }
-
-    /* â”€â”€ HIGHLIGHTS â”€â”€ */
-    .highlights {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-    .highlight-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: .88rem;
-      color: var(--muted);
-      flex: 1 1 220px;
-    }
-    .highlight-item::before {
-      content: "âœ“";
-      color: var(--accent);
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    /* â”€â”€ CONTACT â”€â”€ */
-    .contact-strip {
-      background: var(--navy);
-      color: #fff;
-      text-align: center;
-      padding: 52px 24px;
-    }
-    .contact-strip h2 {
-      font-family: "Merriweather", serif;
-      font-size: 1.6rem;
-      margin-bottom: 10px;
-    }
-    .contact-strip p {
-      color: #a8c0e8;
-      margin-bottom: 28px;
-      font-size: .98rem;
-    }
-    .contact-links {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: .8rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
-
-    /* â”€â”€ PROJECT GRID â”€â”€ */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-    .project-thumb {
-      background: var(--card-bg);
-      border: 2px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      cursor: pointer;
-      transition: border-color .2s, box-shadow .2s, transform .15s;
-      position: relative;
-      user-select: none;
-    }
-    .project-thumb:hover {
-      border-color: #a0bce8;
-      box-shadow: var(--shadow);
-      transform: translateY(-2px);
-    }
-    .project-thumb.active {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(47,128,237,.15), var(--shadow);
-    }
-    .project-thumb.active::after {
-      content: "â—";
-      position: absolute;
-      top: 14px; right: 16px;
-      color: var(--accent);
-      font-size: .65rem;
-    }
-    .thumb-icon {
-      width: 44px; height: 44px;
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem;
-      margin-bottom: 12px;
-    }
-    .thumb-icon-blue   { background: #dbeafe; }
-    .thumb-icon-teal   { background: #d1fae5; }
-    .thumb-icon-purple { background: #ede9fe; }
-    .thumb-title {
-      font-weight: 700;
-      font-size: .93rem;
-      color: var(--navy);
-      margin-bottom: 5px;
-      line-height: 1.3;
-    }
-    .thumb-desc {
-      font-size: .8rem;
-      color: var(--muted);
-      line-height: 1.5;
-      margin-bottom: 12px;
-    }
-    .tag-row { display: flex; gap: 6px; flex-wrap: wrap; }
-
-    /* â”€â”€ VIEWER â”€â”€ */
-    .viewer {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .viewer-panel { display: none; }
-    .viewer-panel.active { display: block; }
-
-    .viewer-header {
-      padding: 28px 36px 22px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .viewer-title {
-      font-family: "Merriweather", serif;
-      font-size: 1.3rem;
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
-    .viewer-desc {
-      color: var(--muted);
-      font-size: .93rem;
-      max-width: 680px;
-      line-height: 1.7;
-    }
-    .viewer-actions { align-self: center; flex-shrink: 0; }
-
-    /* Placeholder panel */
-    .placeholder-body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 280px;
-      gap: 10px;
-      color: var(--muted);
-      font-size: .95rem;
-      background: #f7f9fc;
-    }
-    .placeholder-body .pl-icon { font-size: 2.2rem; opacity: .35; }
-
-    @media (max-width: 700px) {
-      .project-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 640px) {
-      .viewer-header { padding: 20px 18px 16px; }
-      .sirs-frame-wrap { padding: 14px 18px 18px; }
-      .embed-label { padding: 10px 18px; }
-      .sirs-scale-outer { height: 480px; }
-      .sirs-scale-inner iframe { height: 640px; }
-    }
+    :root { --navy:#0f2240; --navy-mid:#1a3a6b; --accent:#2f80ed; --cream:#f7f9fc; --card-bg:#fff; --text:#1a2433; --muted:#5a6a7e; --border:#dce4ef; --shadow:0 4px 24px rgba(15,34,64,.1); --radius:14px; }
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:"Inter",sans-serif; background:var(--cream); color:var(--text); line-height:1.6; }
+    .hero { background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%); color:#fff; padding:80px 24px 72px; text-align:center; position:relative; overflow:hidden; }
+    .hero h1 { font-family:"Merriweather",serif; font-size:clamp(2rem,5vw,3.2rem); margin-bottom:14px; }
+    .hero p { font-size:1.1rem; color:#a8c0e8; max-width:560px; margin:0 auto 32px; }
+    .hero-links { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .btn { display:inline-flex; align-items:center; gap:7px; padding:10px 22px; border-radius:8px; font-size:.9rem; font-weight:600; text-decoration:none; transition:opacity .15s; }
+    .btn:hover { opacity:.85; }
+    .btn-primary { background:var(--accent); color:#fff; }
+    .btn-outline { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.45); }
+    .skills-bar { background:var(--navy); padding:18px 24px; display:flex; justify-content:center; flex-wrap:wrap; gap:10px 24px; }
+    .skill-tag { color:#93c5fd; font-size:.82rem; font-weight:500; text-transform:uppercase; display:flex; align-items:center; gap:6px; }
+    .section { max-width:1100px; margin:0 auto; padding:60px 24px; }
+    .section-label { font-size:.78rem; font-weight:700; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+    .section-title { font-family:"Merriweather",serif; font-size:1.9rem; color:var(--navy); margin-bottom:10px; }
+    .section-sub { color:var(--muted); font-size:1rem; max-width:560px; margin-bottom:44px; }
+    .tag { display:inline-block; padding:3px 11px; border-radius:99px; font-size:.75rem; font-weight:600; }
+    .tag-blue { background:#dbeafe; color:#1d4ed8; }
+    .tag-green { background:#d1fae5; color:#065f46; }
+    .tag-purple { background:#ede9fe; color:#5b21b6; }
+    .tag-red { background:#fee2e2; color:#991b1b; }
+    .tag-orange { background:#ffedd5; color:#92400e; }
+    .tag-row { display:flex; gap:6px; flex-wrap:wrap; }
+    .project-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:28px; }
+    .project-thumb { background:var(--card-bg); border:2px solid var(--border); border-radius:var(--radius); padding:20px; cursor:pointer; transition:all .2s; user-select:none; position:relative; }
+    .project-thumb:hover { border-color:#a0bce8; box-shadow:var(--shadow); }
+    .project-thumb.active { border-color:var(--accent); box-shadow:0 0 0 3px rgba(47,128,237,.15),var(--shadow); }
+    .project-thumb.active::after { content:"◆"; position:absolute; top:14px; right:16px; color:var(--accent); font-size:.65rem; }
+    .thumb-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin-bottom:12px; }
+    .thumb-icon-blue { background:#dbeafe; }
+    .thumb-icon-teal { background:#d1fae5; }
+    .thumb-icon-purple { background:#ede9fe; }
+    .thumb-title { font-weight:700; font-size:.93rem; color:var(--navy); margin-bottom:5px; line-height:1.3; }
+    .thumb-desc { font-size:.8rem; color:var(--muted); line-height:1.5; margin-bottom:12px; }
+    .viewer { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; }
+    .viewer-panel { display:none; }
+    .viewer-panel.active { display:block; }
+    .viewer-header { padding:28px 36px 22px; border-bottom:1px solid var(--border); display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+    .viewer-title { font-family:"Merriweather",serif; font-size:1.3rem; color:var(--navy); margin-bottom:8px; }
+    .viewer-desc { color:var(--muted); font-size:.93rem; max-width:680px; line-height:1.7; }
+    .viewer-actions { align-self:center; flex-shrink:0; }
+    .btn-sm { padding:8px 16px; font-size:.84rem; }
+    .btn-navy { background:var(--navy); color:#fff; }
+    .embed-wrap { padding:0; background:#f0f4f9; border-top:1px solid var(--border); }
+    .embed-label { padding:10px 36px; font-size:.78rem; font-weight:600; text-transform:uppercase; color:var(--muted); background:#f0f4f9; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; }
+    .embed-label span { display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e; }
+    .tableau-container { padding:20px 36px; }
+    .sirs-frame-wrap { padding:20px 36px 24px; }
+    .sirs-scale-outer { overflow:hidden; height:620px; border:1px solid var(--border); border-radius:8px; background:#fff; }
+    .sirs-scale-inner { width:133.33%; transform:scale(0.75); transform-origin:top left; }
+    .sirs-scale-inner iframe { width:100%; height:827px; border:none; display:block; }
+    .vouch-scale-outer { padding:20px 36px 0; overflow:hidden; border:1px solid var(--border); border-radius:8px; background:#fff; margin:0 36px 0 36px; }
+    .vouch-scale-inner { width:100%; height:750px; border-radius:6px; overflow:hidden; }
+    .frame-note { margin-top:10px; font-size:.8rem; color:var(--muted); padding:0 36px 24px; }
+    .highlights { display:flex; gap:12px; flex-wrap:wrap; margin-top:16px; }
+    .highlight-item { display:flex; align-items:flex-start; gap:8px; font-size:.88rem; color:var(--muted); flex:1 1 220px; }
+    .highlight-item::before { content:"✓"; color:var(--accent); font-weight:700; margin-top:1px; }
+    .contact-strip { background:var(--navy); color:#fff; text-align:center; padding:52px 24px; }
+    .contact-strip h2 { font-family:"Merriweather",serif; font-size:1.6rem; margin-bottom:10px; }
+    .contact-strip p { color:#a8c0e8; margin-bottom:28px; }
+    .contact-links { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    footer { text-align:center; padding:20px; font-size:.8rem; color:var(--muted); border-top:1px solid var(--border); }
+    @media (max-width:700px) { .project-grid { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-badge">Portfolio</div>
-    <h1>Nicholas Wagner</h1>
-    <p>Building tools that turn complex information into clear, actionable systems â€” across behavioral health, public health, and beyond.</p>
-    <div class="hero-links">
-      <a href="https://www.linkedin.com/in/nicholas-wagner-754610189" target="_blank" rel="noopener" class="btn btn-primary">
-        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
-      </a>
-      <a href="https://public.tableau.com/app/profile/nicholas.wagner2753" target="_blank" rel="noopener" class="btn btn-outline">Tableau Public</a>
-      <a href="mailto:wagner1274@gmail.com" class="btn btn-outline">wagner1274@gmail.com</a>
-    </div>
-  </header>
+<header class="hero">
+  <div style="display:inline-block;background:rgba(47,128,237,.25);border:1px solid rgba(47,128,237,.5);color:#93c5fd;font-size:.78rem;font-weight:600;padding:4px 14px;border-radius:99px;margin-bottom:20px;text-transform:uppercase;">Portfolio</div>
+  <h1>Nicholas Wagner</h1>
+  <p>Building tools that turn complex information into clear, actionable systems — across behavioral health, public health, and beyond.</p>
+  <div class="hero-links">
+    <a href="https://www.linkedin.com/in/nicholas-wagner-754610189" target="_blank" rel="noopener" class="btn btn-primary">LinkedIn</a>
+    <a href="https://public.tableau.com/app/profile/nicholas.wagner2753" target="_blank" rel="noopener" class="btn btn-outline">Tableau Public</a>
+    <a href="mailto:wagner1274@gmail.com" class="btn btn-outline">wagner1274@gmail.com</a>
+  </div>
+</header>
 
-  <!-- SKILLS -->
-  <div class="skills-bar">
-    <span class="skill-tag">Python</span>
-    <span class="skill-tag">SQL</span>
-    <span class="skill-tag">Tableau</span>
-    <span class="skill-tag">HTML / CSS / JS</span>
-    <span class="skill-tag">Data Visualization</span>
-    <span class="skill-tag">Google Analytics</span>
-    <span class="skill-tag">Research &amp; Psychometrics</span>
+<div class="skills-bar">
+  <span class="skill-tag">Python</span>
+  <span class="skill-tag">SQL</span>
+  <span class="skill-tag">Tableau</span>
+  <span class="skill-tag">HTML / CSS / JS</span>
+  <span class="skill-tag">Data Visualization</span>
+</div>
+
+<main class="section">
+  <p class="section-label">Work</p>
+  <h2 class="section-title">Featured Projects</h2>
+  <p class="section-sub">Select a project below — all demos are live and interactive.</p>
+
+  <div class="project-grid">
+    <div class="project-thumb active" data-project="tableau" onclick="showProject('tableau')">
+      <div class="thumb-icon thumb-icon-blue">📊</div>
+      <div class="thumb-title">State Depression Prevalence Dashboard</div>
+      <div class="thumb-desc">50-state Tableau dashboard tracking depression trends 2011–2024.</div>
+      <div class="tag-row">
+        <span class="tag tag-blue">Tableau</span>
+        <span class="tag tag-green">Public Health</span>
+      </div>
+    </div>
+
+    <div class="project-thumb" data-project="sirs" onclick="showProject('sirs')">
+      <div class="thumb-icon thumb-icon-teal">🗂️</div>
+      <div class="thumb-title">SIRS Coordinator QA Snapshot</div>
+      <div class="thumb-desc">Compliance dashboard for behavioral health care coordinators.</div>
+      <div class="tag-row">
+        <span class="tag tag-red">Healthcare</span>
+        <span class="tag tag-orange">Compliance</span>
+      </div>
+    </div>
+
+    <div class="project-thumb" data-project="vouch" onclick="showProject('vouch')">
+      <div class="thumb-icon thumb-icon-purple" style="font-size:1.4rem;">🍔</div>
+      <div class="thumb-title">LocalVouch</div>
+      <div class="thumb-desc">City-based restaurant discovery app with local rankings and traveler tools.</div>
+      <div class="tag-row">
+        <span class="tag tag-purple">Full Stack</span>
+        <span class="tag tag-orange">Node.js</span>
+      </div>
+    </div>
   </div>
 
-  <!-- PROJECTS -->
-  <main class="section">
-    <p class="section-label">Work</p>
-    <h2 class="section-title">Featured Projects</h2>
-    <p class="section-sub">Select a project below â€” all demos are live and interactive.</p>
+  <div class="viewer">
 
-    <!-- THUMBNAIL GRID -->
-    <div class="project-grid">
-
-      <div class="project-thumb active" data-project="tableau" onclick="showProject('tableau')">
-        <div class="thumb-icon thumb-icon-blue">ðŸ“Š</div>
-        <div class="thumb-title">State Depression Prevalence Dashboard</div>
-        <div class="thumb-desc">50-state Tableau dashboard tracking depression trends 2011â€“2024.</div>
-        <div class="tag-row">
-          <span class="tag tag-blue">Tableau</span>
-          <span class="tag tag-green">Public Health</span>
+    <!-- Tableau Panel -->
+    <div id="panel-tableau" class="viewer-panel active">
+      <div class="viewer-header">
+        <div>
+          <h3 class="viewer-title">State Depression Prevalence in 2024 &amp; Trends Since 2011</h3>
+          <p class="viewer-desc">A multi-view Tableau dashboard exploring depression prevalence rates across all 50 U.S. states — combining a choropleth map, long-run trend lines, and a ranked comparison table.</p>
+          <div class="highlights">
+            <span class="highlight-item">Choropleth map with state-level prevalence shading</span>
+            <span class="highlight-item">Trend lines from 2011–2024 per state</span>
+            <span class="highlight-item">Ranked bar chart for cross-state comparison</span>
+          </div>
+        </div>
+        <div class="viewer-actions">
+          <a href="https://public.tableau.com/shared/WT3PY72CR?:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Open Full Screen ↗</a>
         </div>
       </div>
-
-      <div class="project-thumb" data-project="sirs" onclick="showProject('sirs')">
-        <div class="thumb-icon thumb-icon-teal">ðŸ—‚ï¸</div>
-        <div class="thumb-title">SIRS Coordinator QA Snapshot</div>
-        <div class="thumb-desc">Compliance dashboard for behavioral health care coordinators.</div>
-        <div class="tag-row">
-          <span class="tag tag-red">Healthcare</span>
-          <span class="tag tag-orange">Compliance</span>
+      <div class="embed-wrap">
+        <div class="embed-label"><span></span> Live Interactive Dashboard</div>
+        <div class="tableau-container" id="tableau-wrap">
+          <div class="tableauPlaceholder" id="viz-depression" style="position:relative;">
+            <noscript><a href="https://public.tableau.com/shared/WT3PY72CR"><img alt="State Depression Prevalence" src="https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png" style="border:none" /></a></noscript>
+            <object class="tableauViz" style="display:block;width:100%;">
+              <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+              <param name="embed_code_version" value="3" />
+              <param name="path" value="shared/WT3PY72CR" />
+              <param name="toolbar" value="yes" />
+              <param name="static_image" value="https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png" />
+              <param name="animate_transition" value="yes" />
+              <param name="display_static_image" value="yes" />
+              <param name="display_spinner" value="yes" />
+              <param name="display_overlay" value="yes" />
+              <param name="display_count" value="n" />
+              <param name="language" value="en-US" />
+            </object>
+          </div>
+          <script type="text/javascript">
+            (function () {
+              function sizeViz() {
+                var wrap = document.getElementById('tableau-wrap');
+                var w = wrap.offsetWidth;
+                var h = Math.round(w * 0.72);
+                var viz = document.getElementById('viz-depression');
+                var obj = viz.getElementsByTagName('object')[0];
+                viz.style.width = w + 'px';
+                viz.style.height = h + 'px';
+                obj.style.width = w + 'px';
+                obj.style.height = h + 'px';
+              }
+              sizeViz();
+              window.addEventListener('resize', sizeViz);
+              var s = document.createElement('script');
+              s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+              document.getElementById('viz-depression').appendChild(s);
+            })();
+          </script>
         </div>
       </div>
-
-      <div class="project-thumb" data-project="vouch" onclick="showProject('vouch')">
-        <div class="thumb-icon thumb-icon-purple">ðŸ”—</div>
-        <div class="thumb-title">Vouch Demo</div>
-        <div class="thumb-desc">Coming soon.</div>
-        <div class="tag-row">
-          <span class="tag tag-gray">In Progress</span>
-        </div>
-      </div>
-
     </div>
 
-    <!-- VIEWER PANEL -->
-    <div class="viewer">
-
-      <!-- Tableau -->
-      <div id="panel-tableau" class="viewer-panel active">
-        <div class="viewer-header">
-          <div>
-            <div class="tag-row" style="margin-bottom:10px;">
-              <span class="tag tag-blue">Tableau</span>
-              <span class="tag tag-green">Public Health</span>
-              <span class="tag tag-purple">Geospatial</span>
-            </div>
-            <h3 class="viewer-title">State Depression Prevalence in 2024 &amp; Trends Since 2011</h3>
-            <p class="viewer-desc">A multi-view Tableau dashboard exploring depression prevalence rates across all 50 U.S. states â€” combining a choropleth map, long-run trend lines, and a ranked comparison table. Surfaces which states carry the highest burden and how rates have shifted over more than a decade of CDC BRFSS survey data.</p>
-            <div class="highlights">
-              <span class="highlight-item">Choropleth map with state-level prevalence shading</span>
-              <span class="highlight-item">Trend lines from 2011â€“2024 per state</span>
-              <span class="highlight-item">Ranked bar chart for cross-state comparison</span>
-              <span class="highlight-item">Data sourced from CDC BRFSS behavioral survey</span>
-            </div>
-          </div>
-          <div class="viewer-actions">
-            <a href="https://public.tableau.com/shared/WT3PY72CR?:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Open Full Screen â†—</a>
+    <!-- SIRS Panel -->
+    <div id="panel-sirs" class="viewer-panel">
+      <div class="viewer-header">
+        <div>
+          <h3 class="viewer-title">SIRS Coordinator QA Snapshot — Interactive Compliance Dashboard</h3>
+          <p class="viewer-desc">A fully functional front-end prototype of a quality assurance dashboard for behavioral health coordinators. Built with HTML, CSS, and vanilla JavaScript.</p>
+          <div class="highlights">
+            <span class="highlight-item">Dynamic filtering by coordinator, status, and date range</span>
+            <span class="highlight-item">Color-coded overdue/at-risk/complete status tiers</span>
+            <span class="highlight-item">Sortable audit table with per-row detail</span>
           </div>
         </div>
-        <div class="embed-wrap">
-          <div class="embed-label"><span></span> Live Interactive Dashboard</div>
-          <div class="tableau-container" id="tableau-wrap">
-            <div class="tableauPlaceholder" id="viz-depression" style="position:relative;">
-              <noscript><a href="https://public.tableau.com/shared/WT3PY72CR"><img alt="State Depression Prevalence" src="https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png" style="border:none" /></a></noscript>
-              <object class="tableauViz" style="display:block;">
-                <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
-                <param name="embed_code_version" value="3" />
-                <param name="path" value="shared/WT3PY72CR" />
-                <param name="toolbar" value="yes" />
-                <param name="static_image" value="https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png" />
-                <param name="animate_transition" value="yes" />
-                <param name="display_static_image" value="yes" />
-                <param name="display_spinner" value="yes" />
-                <param name="display_overlay" value="yes" />
-                <param name="display_count" value="n" />
-                <param name="language" value="en-US" />
-              </object>
-            </div>
-            <script type="text/javascript">
-              (function () {
-                function sizeViz() {
-                  var wrap = document.getElementById('tableau-wrap');
-                  var w = wrap.offsetWidth;
-                  var h = Math.round(w * 0.72);
-                  var viz = document.getElementById('viz-depression');
-                  var obj = viz.getElementsByTagName('object')[0];
-                  viz.style.width = w + 'px';
-                  viz.style.height = h + 'px';
-                  obj.style.width = w + 'px';
-                  obj.style.height = h + 'px';
-                }
-                sizeViz();
-                window.addEventListener('resize', sizeViz);
-                var s = document.createElement('script');
-                s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-                document.getElementById('viz-depression').appendChild(s);
-              })();
-            </script>
-          </div>
+        <div class="viewer-actions">
+          <a href="SIRS_QA_Demo_Standalone.html" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Open Full Screen ↗</a>
         </div>
       </div>
-
-      <!-- SIRS -->
-      <div id="panel-sirs" class="viewer-panel">
-        <div class="viewer-header">
-          <div>
-            <div class="tag-row" style="margin-bottom:10px;">
-              <span class="tag tag-red">Healthcare</span>
-              <span class="tag tag-orange">Compliance</span>
-              <span class="tag tag-blue">JavaScript</span>
-              <span class="tag tag-green">UX Design</span>
+      <div class="embed-wrap">
+        <div class="embed-label"><span></span> Live Interactive Demo</div>
+        <div class="sirs-frame-wrap">
+          <div class="sirs-scale-outer">
+            <div class="sirs-scale-inner">
+              <iframe id="sirs-iframe" src="" data-src="SIRS_QA_Demo_Standalone.html" title="SIRS QA Demo" sandbox="allow-scripts allow-same-origin" style="border:none;display:block;width:100%;height:827px;"></iframe>
             </div>
-            <h3 class="viewer-title">SIRS Coordinator QA Snapshot â€” Interactive Compliance Dashboard</h3>
-            <p class="viewer-desc">A fully functional front-end prototype of a quality assurance dashboard for a behavioral health service coordination system. Built to give care coordinators instant visibility into overdue and at-risk compliance items across their caseload â€” without querying a database or running a report manually.</p>
-            <div class="highlights">
-              <span class="highlight-item">Dynamic filtering by coordinator, status, and date range</span>
-              <span class="highlight-item">Color-coded overdue / at-risk / complete status tiers</span>
-              <span class="highlight-item">Sortable audit table with per-row detail</span>
-              <span class="highlight-item">Built entirely in HTML, CSS, and vanilla JavaScript</span>
-            </div>
-          </div>
-          <div class="viewer-actions">
-            <a href="SIRS_QA_Demo_Standalone.html" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Open Full Screen â†—</a>
           </div>
         </div>
-        <div class="embed-wrap">
-          <div class="embed-label"><span></span> Live Interactive Demo</div>
-          <div class="sirs-frame-wrap">
-            <div class="sirs-scale-outer">
-              <div class="sirs-scale-inner">
-                <iframe id="sirs-iframe" src="" data-src="SIRS_QA_Demo_Standalone.html"
-                  title="SIRS QA Demo" sandbox="allow-scripts allow-same-origin"
-                  style="border:none;display:block;width:100%;height:827px;"></iframe>
-              </div>
-            </div>
-            <p class="frame-note">Open full screen for the best experience.</p>
-          </div>
-        </div>
+        <p class="frame-note">Open full screen for the best experience.</p>
       </div>
-
-      <!-- Vouch placeholder -->
-      <div id="panel-vouch" class="viewer-panel">
-        <div class="viewer-header">
-          <div>
-            <div class="tag-row" style="margin-bottom:10px;">
-              <span class="tag tag-gray">In Progress</span>
-            </div>
-            <h3 class="viewer-title">Vouch Demo</h3>
-            <p class="viewer-desc">This project will be added here soon.</p>
-          </div>
-        </div>
-        <div class="placeholder-body">
-          <div class="pl-icon">ðŸ”—</div>
-          <div>Coming soon</div>
-        </div>
-      </div>
-
     </div>
-  </main>
 
-  <!-- CONTACT -->
-  <section class="contact-strip">
-    <h2>Let's Connect</h2>
-    <p>Los Angeles, CA &nbsp;Â·&nbsp; Open to new opportunities</p>
-    <div class="contact-links">
-      <a href="https://www.linkedin.com/in/nicholas-wagner-754610189" target="_blank" rel="noopener" class="btn btn-primary">LinkedIn</a>
-      <a href="https://public.tableau.com/app/profile/nicholas.wagner2753" target="_blank" rel="noopener" class="btn btn-outline">Tableau Public</a>
-      <a href="mailto:wagner1274@gmail.com" class="btn btn-outline">wagner1274@gmail.com</a>
+    <!-- LocalVouch Panel -->
+    <div id="panel-vouch" class="viewer-panel">
+      <div class="viewer-header">
+        <div>
+          <h3 class="viewer-title">LocalVouch — City-Based Restaurant Discovery App</h3>
+          <p class="viewer-desc">Full-stack progressive web app for city-based restaurant discovery. Features GPS-verified local status, media-first Explore feed, and traveler tools. Built with Node.js, Supabase, and PWA.</p>
+          <div class="highlights">
+            <span class="highlight-item">GPS-verified local status &amp; city-scoped rankings</span>
+            <span class="highlight-item">Media-first Explore feed with restaurant context</span>
+            <span class="highlight-item">Traveler planning lists, saves, and ask-locals</span>
+          </div>
+        </div>
+        <div class="viewer-actions">
+          <a href="https://github.com/NicholasHWagner/LocalVouch" target="_blank" rel="noopener" class="btn btn-navy btn-sm">View on GitHub ↗</a>
+        </div>
+      </div>
+      <div class="embed-wrap">
+        <div class="embed-label"><span></span> Live Interactive Demo</div>
+        <div class="vouch-scale-outer">
+          <div class="vouch-scale-inner">
+            <iframe src="https://localvouch.onrender.com" title="LocalVouch App" style="width:100%;height:100%;border:none;" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox" loading="lazy"></iframe>
+          </div>
+        </div>
+        <p class="frame-note">Click "Demo App" at login to explore without credentials.</p>
+      </div>
     </div>
-  </section>
 
-  <footer>&copy; 2026 Nicholas Wagner</footer>
+  </div>
+</main>
 
-  <script>
-    function showProject(id) {
-      document.querySelectorAll('.project-thumb').forEach(function (el) {
-        el.classList.toggle('active', el.dataset.project === id);
-      });
-      document.querySelectorAll('.viewer-panel').forEach(function (el) {
-        el.classList.toggle('active', el.id === 'panel-' + id);
-      });
-      // Lazy-load SIRS iframe on first click
-      if (id === 'sirs') {
-        var iframe = document.getElementById('sirs-iframe');
-        if (!iframe.src || iframe.src === window.location.href) {
-          iframe.src = iframe.dataset.src;
-        }
-      }
+<section class="contact-strip">
+  <h2>Let's Connect</h2>
+  <p>Los Angeles, CA · Open to new opportunities</p>
+  <div class="contact-links">
+    <a href="https://www.linkedin.com/in/nicholas-wagner-754610189" target="_blank" rel="noopener" class="btn btn-primary">LinkedIn</a>
+    <a href="https://public.tableau.com/app/profile/nicholas.wagner2753" target="_blank" rel="noopener" class="btn btn-outline">Tableau Public</a>
+    <a href="mailto:wagner1274@gmail.com" class="btn btn-outline">wagner1274@gmail.com</a>
+  </div>
+</section>
+
+<footer>&copy; 2026 Nicholas Wagner</footer>
+
+<script>
+function showProject(id) {
+  document.querySelectorAll('.project-thumb').forEach(function (el) {
+    el.classList.toggle('active', el.dataset.project === id);
+  });
+  document.querySelectorAll('.viewer-panel').forEach(function (el) {
+    el.classList.toggle('active', el.id === 'panel-' + id);
+  });
+  if (id === 'sirs') {
+    var iframe = document.getElementById('sirs-iframe');
+    if (!iframe.src || iframe.src === window.location.href) {
+      iframe.src = iframe.dataset.src;
     }
-  </script>
+  }
+}
+</script>
 
 </body>
 </html>

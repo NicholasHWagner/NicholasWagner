@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nicholas Wagner — Portfolio</title>
+  <title>Nicholas Wagner â€” Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet" />
   <style>
+    /* â”€â”€ GRID + VIEWER LAYOUT â”€â”€ */
     :root {
       --navy:    #0f2240;
       --navy-mid:#1a3a6b;
@@ -31,7 +32,7 @@
       line-height: 1.6;
     }
 
-    /* ── HERO ── */
+    /* â”€â”€ HERO â”€â”€ */
     .hero {
       background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
       color: #fff;
@@ -94,7 +95,7 @@
     .btn-primary { background: var(--accent); color: #fff; }
     .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.45); }
 
-    /* ── SKILLS ── */
+    /* â”€â”€ SKILLS â”€â”€ */
     .skills-bar {
       background: var(--navy);
       padding: 18px 24px;
@@ -114,12 +115,12 @@
       gap: 6px;
     }
     .skill-tag::before {
-      content: "▪";
+      content: "â–ª";
       color: var(--accent);
       font-size: .6rem;
     }
 
-    /* ── SECTION ── */
+    /* â”€â”€ SECTION â”€â”€ */
     .section {
       max-width: 1100px;
       margin: 0 auto;
@@ -146,7 +147,7 @@
       margin-bottom: 44px;
     }
 
-    /* ── PROJECT CARDS ── */
+    /* â”€â”€ PROJECT CARDS â”€â”€ */
     .project-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -178,11 +179,12 @@
       font-weight: 600;
       letter-spacing: .04em;
     }
-    .tag-blue  { background: #dbeafe; color: #1d4ed8; }
-    .tag-green { background: #d1fae5; color: #065f46; }
-    .tag-purple{ background: #ede9fe; color: #5b21b6; }
-    .tag-red   { background: #fee2e2; color: #991b1b; }
-    .tag-orange{ background: #ffedd5; color: #92400e; }
+    .tag-blue   { background: #dbeafe; color: #1d4ed8; }
+    .tag-green  { background: #d1fae5; color: #065f46; }
+    .tag-purple { background: #ede9fe; color: #5b21b6; }
+    .tag-red    { background: #fee2e2; color: #991b1b; }
+    .tag-orange { background: #ffedd5; color: #92400e; }
+    .tag-gray   { background: #f1f5f9; color: #64748b; }
     .card-title {
       font-family: "Merriweather", serif;
       font-size: 1.35rem;
@@ -207,7 +209,7 @@
     }
     .btn-navy { background: var(--navy); color: #fff; }
 
-    /* ── EMBED AREA ── */
+    /* â”€â”€ EMBED AREA â”€â”€ */
     .embed-wrap {
       padding: 0;
       background: #f0f4f9;
@@ -247,7 +249,7 @@
       width: 100% !important;
     }
 
-    /* SIRS iframe — scaled down so full dashboard is visible */
+    /* SIRS iframe â€” scaled down so full dashboard is visible */
     .sirs-frame-wrap {
       padding: 20px 36px 24px;
     }
@@ -275,7 +277,7 @@
       color: var(--muted);
     }
 
-    /* ── HIGHLIGHTS ── */
+    /* â”€â”€ HIGHLIGHTS â”€â”€ */
     .highlights {
       display: flex;
       gap: 12px;
@@ -291,14 +293,14 @@
       flex: 1 1 220px;
     }
     .highlight-item::before {
-      content: "✓";
+      content: "âœ“";
       color: var(--accent);
       font-weight: 700;
       flex-shrink: 0;
       margin-top: 1px;
     }
 
-    /* ── CONTACT ── */
+    /* â”€â”€ CONTACT â”€â”€ */
     .contact-strip {
       background: var(--navy);
       color: #fff;
@@ -330,10 +332,119 @@
       border-top: 1px solid var(--border);
     }
 
+    /* â”€â”€ PROJECT GRID â”€â”€ */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .project-thumb {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      cursor: pointer;
+      transition: border-color .2s, box-shadow .2s, transform .15s;
+      position: relative;
+      user-select: none;
+    }
+    .project-thumb:hover {
+      border-color: #a0bce8;
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+    .project-thumb.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(47,128,237,.15), var(--shadow);
+    }
+    .project-thumb.active::after {
+      content: "â—";
+      position: absolute;
+      top: 14px; right: 16px;
+      color: var(--accent);
+      font-size: .65rem;
+    }
+    .thumb-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+    }
+    .thumb-icon-blue   { background: #dbeafe; }
+    .thumb-icon-teal   { background: #d1fae5; }
+    .thumb-icon-purple { background: #ede9fe; }
+    .thumb-title {
+      font-weight: 700;
+      font-size: .93rem;
+      color: var(--navy);
+      margin-bottom: 5px;
+      line-height: 1.3;
+    }
+    .thumb-desc {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .tag-row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    /* â”€â”€ VIEWER â”€â”€ */
+    .viewer {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .viewer-panel { display: none; }
+    .viewer-panel.active { display: block; }
+
+    .viewer-header {
+      padding: 28px 36px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .viewer-title {
+      font-family: "Merriweather", serif;
+      font-size: 1.3rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .viewer-desc {
+      color: var(--muted);
+      font-size: .93rem;
+      max-width: 680px;
+      line-height: 1.7;
+    }
+    .viewer-actions { align-self: center; flex-shrink: 0; }
+
+    /* Placeholder panel */
+    .placeholder-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 280px;
+      gap: 10px;
+      color: var(--muted);
+      font-size: .95rem;
+      background: #f7f9fc;
+    }
+    .placeholder-body .pl-icon { font-size: 2.2rem; opacity: .35; }
+
+    @media (max-width: 700px) {
+      .project-grid { grid-template-columns: 1fr; }
+    }
     @media (max-width: 640px) {
-      .card-header { padding: 22px 20px 18px; }
-      .sirs-frame-wrap { padding: 16px 20px 20px; }
-      .embed-label { padding: 10px 20px; }
+      .viewer-header { padding: 20px 18px 16px; }
+      .sirs-frame-wrap { padding: 14px 18px 18px; }
+      .embed-label { padding: 10px 18px; }
       .sirs-scale-outer { height: 480px; }
       .sirs-scale-inner iframe { height: 640px; }
     }
@@ -341,177 +452,228 @@
 </head>
 <body>
 
-  <!-- ── HERO ── -->
+  <!-- HERO -->
   <header class="hero">
     <div class="hero-badge">Portfolio</div>
     <h1>Nicholas Wagner</h1>
-    <p>Building tools, visualizations, and systems that make complex information easy to understand and act on.</p>
+    <p>Building tools that turn complex information into clear, actionable systems â€” across behavioral health, public health, and beyond.</p>
     <div class="hero-links">
-      <a href="https://public.tableau.com/app/profile/nicholas.wagner2753" target="_blank" rel="noopener" class="btn btn-primary">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        Tableau Public Profile
+      <a href="https://www.linkedin.com/in/nicholas-wagner-754610189" target="_blank" rel="noopener" class="btn btn-primary">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
       </a>
-      <a href="mailto:" class="btn btn-outline">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        Contact Me
-      </a>
+      <a href="https://public.tableau.com/app/profile/nicholas.wagner2753" target="_blank" rel="noopener" class="btn btn-outline">Tableau Public</a>
+      <a href="mailto:wagner1274@gmail.com" class="btn btn-outline">wagner1274@gmail.com</a>
     </div>
   </header>
 
-  <!-- ── SKILLS ── -->
+  <!-- SKILLS -->
   <div class="skills-bar">
     <span class="skill-tag">Python</span>
     <span class="skill-tag">SQL</span>
     <span class="skill-tag">Tableau</span>
     <span class="skill-tag">HTML / CSS / JS</span>
     <span class="skill-tag">Data Visualization</span>
-    <span class="skill-tag">Dashboard Design</span>
-    <span class="skill-tag">UX Prototyping</span>
+    <span class="skill-tag">Google Analytics</span>
+    <span class="skill-tag">Research &amp; Psychometrics</span>
   </div>
 
-  <!-- ── PROJECTS ── -->
+  <!-- PROJECTS -->
   <main class="section">
     <p class="section-label">Work</p>
     <h2 class="section-title">Featured Projects</h2>
-    <p class="section-sub">Live, interactive demos — explore them directly below.</p>
+    <p class="section-sub">Select a project below â€” all demos are live and interactive.</p>
 
-    <!-- PROJECT 1: Tableau -->
-    <div class="project-card">
-      <div class="card-header">
-        <div>
-          <div class="card-meta">
-            <span class="tag tag-blue">Tableau</span>
-            <span class="tag tag-green">Public Health</span>
-            <span class="tag tag-purple">Geospatial</span>
-          </div>
-          <h3 class="card-title">State Depression Prevalence in 2024 &amp; Trends Since 2011</h3>
-          <p class="card-desc">
-            A multi-view Tableau dashboard exploring depression prevalence rates across all 50 U.S. states, combining a choropleth map, long-run trend lines, and a ranked comparison table. Surfaces which states have the highest burden and how rates have shifted over more than a decade of BRFSS survey data.
-          </p>
-          <div class="highlights">
-            <span class="highlight-item">Choropleth map with state-level prevalence shading</span>
-            <span class="highlight-item">Trend lines from 2011–2024 per state</span>
-            <span class="highlight-item">Ranked bar chart for instant cross-state comparison</span>
-            <span class="highlight-item">Data sourced from CDC BRFSS behavioral survey</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="https://public.tableau.com/shared/WT3PY72CR?:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener" class="btn btn-navy btn-sm">
-            Open Full Screen ↗
-          </a>
+    <!-- THUMBNAIL GRID -->
+    <div class="project-grid">
+
+      <div class="project-thumb active" data-project="tableau" onclick="showProject('tableau')">
+        <div class="thumb-icon thumb-icon-blue">ðŸ“Š</div>
+        <div class="thumb-title">State Depression Prevalence Dashboard</div>
+        <div class="thumb-desc">50-state Tableau dashboard tracking depression trends 2011â€“2024.</div>
+        <div class="tag-row">
+          <span class="tag tag-blue">Tableau</span>
+          <span class="tag tag-green">Public Health</span>
         </div>
       </div>
 
-      <div class="embed-wrap">
-        <div class="embed-label"><span></span> Live Interactive Dashboard</div>
-        <div class="tableau-container" id="tableau-wrap">
-          <div class='tableauPlaceholder' id='viz-depression' style='position:relative;'>
-            <noscript>
-              <a href='https://public.tableau.com/shared/WT3PY72CR'><img alt='State Depression Prevalence in 2024 and Trends Since 2011' src='https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png' style='border:none' /></a>
-            </noscript>
-            <object class='tableauViz' style='display:block;'>
-              <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-              <param name='embed_code_version' value='3' />
-              <param name='path' value='shared/WT3PY72CR' />
-              <param name='toolbar' value='yes' />
-              <param name='static_image' value='https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png' />
-              <param name='animate_transition' value='yes' />
-              <param name='display_static_image' value='yes' />
-              <param name='display_spinner' value='yes' />
-              <param name='display_overlay' value='yes' />
-              <param name='display_count' value='n' />
-              <param name='language' value='en-US' />
-            </object>
-          </div>
-          <script type='text/javascript'>
-            (function() {
-              function sizeViz() {
-                var wrap = document.getElementById('tableau-wrap');
-                var w = wrap.offsetWidth;
-                var h = Math.round(w * 0.72);
-                var viz = document.getElementById('viz-depression');
-                var obj = viz.getElementsByTagName('object')[0];
-                viz.style.width  = w + 'px';
-                viz.style.height = h + 'px';
-                obj.style.width  = w + 'px';
-                obj.style.height = h + 'px';
-              }
-              sizeViz();
-              window.addEventListener('resize', sizeViz);
-              var s = document.createElement('script');
-              s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-              document.getElementById('viz-depression').appendChild(s);
-            })();
-          </script>
+      <div class="project-thumb" data-project="sirs" onclick="showProject('sirs')">
+        <div class="thumb-icon thumb-icon-teal">ðŸ—‚ï¸</div>
+        <div class="thumb-title">SIRS Coordinator QA Snapshot</div>
+        <div class="thumb-desc">Compliance dashboard for behavioral health care coordinators.</div>
+        <div class="tag-row">
+          <span class="tag tag-red">Healthcare</span>
+          <span class="tag tag-orange">Compliance</span>
         </div>
       </div>
+
+      <div class="project-thumb" data-project="vouch" onclick="showProject('vouch')">
+        <div class="thumb-icon thumb-icon-purple">ðŸ”—</div>
+        <div class="thumb-title">Vouch Demo</div>
+        <div class="thumb-desc">Coming soon.</div>
+        <div class="tag-row">
+          <span class="tag tag-gray">In Progress</span>
+        </div>
+      </div>
+
     </div>
 
-    <!-- PROJECT 2: SIRS QA Demo -->
-    <div class="project-card">
-      <div class="card-header">
-        <div>
-          <div class="card-meta">
-            <span class="tag tag-red">Healthcare</span>
-            <span class="tag tag-orange">Compliance</span>
-            <span class="tag tag-blue">JavaScript</span>
-            <span class="tag tag-green">UX Design</span>
-          </div>
-          <h3 class="card-title">SIRS Coordinator QA Snapshot — Interactive Compliance Dashboard</h3>
-          <p class="card-desc">
-            A fully functional front-end prototype of a quality assurance dashboard for a behavioral health service coordination system. Built to give care coordinators instant visibility into overdue and at-risk compliance items across their caseload — without needing to query a database or run a report manually. Simulates a real-world clinical operations tool with live filtering, sortable tables, and status-coded alerts.
-          </p>
-          <div class="highlights">
-            <span class="highlight-item">Dynamic filtering by coordinator, status, and date range</span>
-            <span class="highlight-item">Color-coded overdue / at-risk / complete status tiers</span>
-            <span class="highlight-item">Sortable audit table with per-row drill-down</span>
-            <span class="highlight-item">Built entirely in HTML, CSS, and vanilla JavaScript</span>
-          </div>
-        </div>
-        <div class="card-actions">
-          <a href="SIRS_QA_Demo_Standalone.html" target="_blank" rel="noopener" class="btn btn-navy btn-sm">
-            Open Full Screen ↗
-          </a>
-        </div>
-      </div>
+    <!-- VIEWER PANEL -->
+    <div class="viewer">
 
-      <div class="embed-wrap">
-        <div class="embed-label"><span></span> Live Interactive Demo</div>
-        <div class="sirs-frame-wrap">
-          <div class="sirs-scale-outer">
-            <div class="sirs-scale-inner">
-              <iframe
-                src="SIRS_QA_Demo_Standalone.html"
-                title="SIRS Coordinator QA Snapshot Demo"
-                loading="lazy"
-                sandbox="allow-scripts allow-same-origin"
-              ></iframe>
+      <!-- Tableau -->
+      <div id="panel-tableau" class="viewer-panel active">
+        <div class="viewer-header">
+          <div>
+            <div class="tag-row" style="margin-bottom:10px;">
+              <span class="tag tag-blue">Tableau</span>
+              <span class="tag tag-green">Public Health</span>
+              <span class="tag tag-purple">Geospatial</span>
+            </div>
+            <h3 class="viewer-title">State Depression Prevalence in 2024 &amp; Trends Since 2011</h3>
+            <p class="viewer-desc">A multi-view Tableau dashboard exploring depression prevalence rates across all 50 U.S. states â€” combining a choropleth map, long-run trend lines, and a ranked comparison table. Surfaces which states carry the highest burden and how rates have shifted over more than a decade of CDC BRFSS survey data.</p>
+            <div class="highlights">
+              <span class="highlight-item">Choropleth map with state-level prevalence shading</span>
+              <span class="highlight-item">Trend lines from 2011â€“2024 per state</span>
+              <span class="highlight-item">Ranked bar chart for cross-state comparison</span>
+              <span class="highlight-item">Data sourced from CDC BRFSS behavioral survey</span>
             </div>
           </div>
-          <p class="frame-note">Open full screen for the best experience.</p>
+          <div class="viewer-actions">
+            <a href="https://public.tableau.com/shared/WT3PY72CR?:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Open Full Screen â†—</a>
+          </div>
+        </div>
+        <div class="embed-wrap">
+          <div class="embed-label"><span></span> Live Interactive Dashboard</div>
+          <div class="tableau-container" id="tableau-wrap">
+            <div class="tableauPlaceholder" id="viz-depression" style="position:relative;">
+              <noscript><a href="https://public.tableau.com/shared/WT3PY72CR"><img alt="State Depression Prevalence" src="https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png" style="border:none" /></a></noscript>
+              <object class="tableauViz" style="display:block;">
+                <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+                <param name="embed_code_version" value="3" />
+                <param name="path" value="shared/WT3PY72CR" />
+                <param name="toolbar" value="yes" />
+                <param name="static_image" value="https://public.tableau.com/static/images/WT/WT3PY72CR/1_rss.png" />
+                <param name="animate_transition" value="yes" />
+                <param name="display_static_image" value="yes" />
+                <param name="display_spinner" value="yes" />
+                <param name="display_overlay" value="yes" />
+                <param name="display_count" value="n" />
+                <param name="language" value="en-US" />
+              </object>
+            </div>
+            <script type="text/javascript">
+              (function () {
+                function sizeViz() {
+                  var wrap = document.getElementById('tableau-wrap');
+                  var w = wrap.offsetWidth;
+                  var h = Math.round(w * 0.72);
+                  var viz = document.getElementById('viz-depression');
+                  var obj = viz.getElementsByTagName('object')[0];
+                  viz.style.width = w + 'px';
+                  viz.style.height = h + 'px';
+                  obj.style.width = w + 'px';
+                  obj.style.height = h + 'px';
+                }
+                sizeViz();
+                window.addEventListener('resize', sizeViz);
+                var s = document.createElement('script');
+                s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                document.getElementById('viz-depression').appendChild(s);
+              })();
+            </script>
+          </div>
         </div>
       </div>
-    </div>
 
+      <!-- SIRS -->
+      <div id="panel-sirs" class="viewer-panel">
+        <div class="viewer-header">
+          <div>
+            <div class="tag-row" style="margin-bottom:10px;">
+              <span class="tag tag-red">Healthcare</span>
+              <span class="tag tag-orange">Compliance</span>
+              <span class="tag tag-blue">JavaScript</span>
+              <span class="tag tag-green">UX Design</span>
+            </div>
+            <h3 class="viewer-title">SIRS Coordinator QA Snapshot â€” Interactive Compliance Dashboard</h3>
+            <p class="viewer-desc">A fully functional front-end prototype of a quality assurance dashboard for a behavioral health service coordination system. Built to give care coordinators instant visibility into overdue and at-risk compliance items across their caseload â€” without querying a database or running a report manually.</p>
+            <div class="highlights">
+              <span class="highlight-item">Dynamic filtering by coordinator, status, and date range</span>
+              <span class="highlight-item">Color-coded overdue / at-risk / complete status tiers</span>
+              <span class="highlight-item">Sortable audit table with per-row detail</span>
+              <span class="highlight-item">Built entirely in HTML, CSS, and vanilla JavaScript</span>
+            </div>
+          </div>
+          <div class="viewer-actions">
+            <a href="SIRS_QA_Demo_Standalone.html" target="_blank" rel="noopener" class="btn btn-navy btn-sm">Open Full Screen â†—</a>
+          </div>
+        </div>
+        <div class="embed-wrap">
+          <div class="embed-label"><span></span> Live Interactive Demo</div>
+          <div class="sirs-frame-wrap">
+            <div class="sirs-scale-outer">
+              <div class="sirs-scale-inner">
+                <iframe id="sirs-iframe" src="" data-src="SIRS_QA_Demo_Standalone.html"
+                  title="SIRS QA Demo" sandbox="allow-scripts allow-same-origin"
+                  style="border:none;display:block;width:100%;height:827px;"></iframe>
+              </div>
+            </div>
+            <p class="frame-note">Open full screen for the best experience.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vouch placeholder -->
+      <div id="panel-vouch" class="viewer-panel">
+        <div class="viewer-header">
+          <div>
+            <div class="tag-row" style="margin-bottom:10px;">
+              <span class="tag tag-gray">In Progress</span>
+            </div>
+            <h3 class="viewer-title">Vouch Demo</h3>
+            <p class="viewer-desc">This project will be added here soon.</p>
+          </div>
+        </div>
+        <div class="placeholder-body">
+          <div class="pl-icon">ðŸ”—</div>
+          <div>Coming soon</div>
+        </div>
+      </div>
+
+    </div>
   </main>
 
-  <!-- ── CONTACT ── -->
+  <!-- CONTACT -->
   <section class="contact-strip">
     <h2>Let's Connect</h2>
-    <p>Have a project, role, or idea worth talking about? Reach out.</p>
+    <p>Los Angeles, CA &nbsp;Â·&nbsp; Open to new opportunities</p>
     <div class="contact-links">
-      <a href="https://public.tableau.com/app/profile/nicholas.wagner2753" target="_blank" rel="noopener" class="btn btn-primary">
-        Tableau Public
-      </a>
-      <a href="mailto:" class="btn btn-outline">
-        Email Me
-      </a>
+      <a href="https://www.linkedin.com/in/nicholas-wagner-754610189" target="_blank" rel="noopener" class="btn btn-primary">LinkedIn</a>
+      <a href="https://public.tableau.com/app/profile/nicholas.wagner2753" target="_blank" rel="noopener" class="btn btn-outline">Tableau Public</a>
+      <a href="mailto:wagner1274@gmail.com" class="btn btn-outline">wagner1274@gmail.com</a>
     </div>
   </section>
 
-  <footer>
-    &copy; 2026 Nicholas Wagner
-  </footer>
+  <footer>&copy; 2026 Nicholas Wagner</footer>
+
+  <script>
+    function showProject(id) {
+      document.querySelectorAll('.project-thumb').forEach(function (el) {
+        el.classList.toggle('active', el.dataset.project === id);
+      });
+      document.querySelectorAll('.viewer-panel').forEach(function (el) {
+        el.classList.toggle('active', el.id === 'panel-' + id);
+      });
+      // Lazy-load SIRS iframe on first click
+      if (id === 'sirs') {
+        var iframe = document.getElementById('sirs-iframe');
+        if (!iframe.src || iframe.src === window.location.href) {
+          iframe.src = iframe.dataset.src;
+        }
+      }
+    }
+  </script>
 
 </body>
 </html>

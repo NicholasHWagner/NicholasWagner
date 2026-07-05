@@ -55,19 +55,19 @@
     .embed-wrap { padding:16px 24px; background:#f0f4f9; border-top:1px solid var(--border); }
     .embed-label { padding:10px 16px; font-size:.78rem; font-weight:600; text-transform:uppercase; color:var(--muted); background:#f0f4f9; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; justify-content:center; }
     .embed-label span { display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e; }
-    .tableau-wrapper { width:100%; display:flex; flex-direction:row; gap:24px; align-items:flex-start; }
-    .tableau-column { flex:0 1 auto; min-width:0; }
-    .tableau-container { padding:0; width:90%; }
+    .tableau-wrapper { width:100%; display:grid; grid-template-columns:1fr 280px; gap:24px; align-items:start; }
+    .tableau-column { min-width:0; }
+    .tableau-container { padding:0; width:100%; }
     .tableauPlaceholder { }
     .tableauViz { width:100% !important; max-width:100% !important; }
-    .tableau-sidebar { flex:0 1 200px; padding:24px; background:#f9fafb; border-radius:10px; border:1px solid var(--border); font-size:.9rem; line-height:1.6; }
+    .tableau-sidebar { padding:24px; background:#f9fafb; border-radius:10px; border:1px solid var(--border); font-size:.9rem; line-height:1.6; }
     .tableau-sidebar h4 { font-size:.95rem; font-weight:700; color:var(--navy); margin-bottom:10px; margin-top:16px; }
     .tableau-sidebar h4:first-child { margin-top:0; }
     .tableau-sidebar p { color:var(--muted); margin-bottom:10px; font-size:.85rem; }
     .tableau-sidebar ul { list-style:none; padding-left:0; margin-bottom:10px; }
     .tableau-sidebar li { color:var(--muted); margin-bottom:6px; font-size:.85rem; padding-left:14px; position:relative; }
     .tableau-sidebar li::before { content:"→"; position:absolute; left:0; color:var(--accent); font-weight:700; }
-    @media (max-width:900px) { .tableau-wrapper { flex-direction:column; gap:16px; } .tableau-sidebar { flex:1 1 auto; } }
+    @media (max-width:900px) { .tableau-wrapper { grid-template-columns:1fr; gap:16px; } }
     .sirs-frame-wrap { padding:20px 36px 24px; }
     .sirs-scale-outer { overflow:hidden; height:620px; border:1px solid var(--border); border-radius:8px; background:#fff; }
     .sirs-scale-inner { width:133.33%; transform:scale(0.75); transform-origin:top left; }
